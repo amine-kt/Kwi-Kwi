@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modification Photo de profile</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<style>
+    span {
+        color: red;
+    }
+</style>
+
+<body>
+    <header>
+        <h1>Modifier ma photo de profile</h1>
+    </header>
+    <main>
+        <p>Photo de profil actuelle :</p>
+        <img src="" alt="" class="picture_profile" height="100px">
+        <form>
+            <label for="file">Choisissez une image à télécharger :</label>
+            <input type="file" name="file" id="file">
+            <input type="submit" id="upload"><br><span id="file_err"></span>
+        </form><br>
+        <!-- lien redirige vers la page profil -->
+        <a href="./profile.html"><button>Retour page profile</button></a>
+    </main>
+</body>
+
+<script src="../utils/function.js"></script>
+<script src="../utils/picture_profile.js"></script>
+
+</html>

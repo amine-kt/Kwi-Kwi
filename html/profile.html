@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<style>
+    span {
+        color: red;
+    }
+</style>
+
+<body>
+    <header>
+        <a href="./home.html">Home</a><a href="./profile.html">Profil</a>
+        <h1>Votre Profil</h1>
+    </header>
+    <main>
+        <img src="" alt="" class="picture_profile" height="100px">
+        <a href="./picture_profile.html">Modifier votre photo de profile</a>
+        <form>
+            <!-- Prénom, Nom -->
+            <label>Firstname :</label>
+            <label></label><br>
+            <label>Lastname :</label>
+            <label></label><br>
+
+            <!-- Username -->
+            <label for="username">Username :</label>
+            <label></label>
+            <input type="text" name="username" id="username">
+            <button>Modifier</button>
+            <button>Annuler</button>
+            <span id="username_err"></span><br>
+
+            <!-- Email -->
+            <label for="email">Email :</label>
+            <label></label>
+            <input type="text" name="email" id="email">
+            <button>Modifier</button>
+            <button>Annuler</button>
+            <span id="email_err"></span><br>
+
+            <!-- Birthdate -->
+            <label>Birthdate :</label>
+            <label></label><br>
+            <label>Gender :</label>
+            <label></label><br><br>
+
+            <!-- Mot de passe -->
+            <label for="password">Password :</label>
+            <input type="password" placeholder="••••••••" name="password" id="password">
+            <button>Valider</button>
+            <span id="password_err"></span>
+
+
+        </form>
+
+        <!-- lien redirige vers la page de modification du mot de passe -->
+        <a href="./modif_password.html"><button>Modifier mon password</button></a>
+
+    </main>
+</body>
+
+<script src="../utils/function.js"></script>
+<script src="../utils/modif.js"></script>
+
+</html>

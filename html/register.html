@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<!-- style provisoire -->
+<style>
+    span {
+        color: red;
+    }
+</style>
+
+<body>
+    <h1>Register</h1>
+
+    <form>
+        <!-- Prénom -->
+        <label for="firstname">Firstname :</label>
+        <input type="text" name="firstname" id="firstname" placeholder="Prénom">
+        <span id="firstname_err"></span><br>
+
+        <!-- Nom -->
+        <label for="lastname">Lastname :</label>
+        <input type="text" name="lastname" id="lastname" placeholder="Nom">
+        <span id="lastname_err"></span><br>
+
+        <!-- Date de naissance -->
+        <label for="birthdate">Birthdate :</label>
+        <input type="date" name="birthdate" id="birthdate">
+        <span id="birthdate_err"></span><br>
+
+        <!-- Email -->
+        <label for="email">Email :</label>
+        <input type="email" name="email" id="email" placeholder="Email">
+        <span id="email_err"></span><br>
+
+        <!-- Genre -->
+        <label for="">Gender :</label>
+        <input type="radio" id="male" name="gender" value="male">
+        <label for="male">Male</label>
+        <input type="radio" id="femal" name="gender" value="femal">
+        <label for="femal">Femal</label>
+        <input type="radio" id="other" name="gender" value="other">
+        <label for="other">Other</label>
+        <span id="gender_err"></span><br>
+
+        <!-- Username -->
+        <label for="username">Username :</label>
+        <input type="text" name="username" id="username" placeholder="Username">
+        <span id="username_err"></span><br>
+
+        <!-- Mot de passe -->
+        <label for="password">Password :</label>
+        <input type="password" name="password" id="password" placeholder="Mot de passe">
+        <span id="password_err"></span><br>
+
+        <!-- Confirmation du mot de passe -->
+        <label for="confirm_password">Confirm Password :</label>
+        <input type="password" name="confirm_password" id="confirm_password" placeholder="confirm password">
+        <span id="confirm_password_err"></span><br><br>
+
+        <button>S'inscrire</button>
+    </form>
+    <p>Déjà inscrit ? <a href="./login.html">Connectez-vous ici</a></p>
+</body>
+
+<script src="../utils/function.js"></script>
+<script src="../utils/register.js"></script>
+
+</html>

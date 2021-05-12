@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <a href="./home.html">Home</a><a href="./profile.html">Profil</a>
+    </header>
+    <h1>Home</h1><br>
+    <p>Bonjour et bienvenue sur votre page d'accueil.</p><br>
+    <a href="../flux/logout.php" id="deco"><button>Déconnexion</button></a><br><br>
+
+    <form>
+        <textarea type="text" id="publi" name="publi"></textarea><br>
+        <button id="postu">publier</button>
+        <span id="publication_err"></span><br><br>
+    </form>
+    <form id="comm" style="display: none">
+        <input type="text" id="comment" name="comment">
+        <button id="send">Commenter</button>
+        <button id="back">Annuler</button>
+        <span id="comment_err"></span><br><br>
+    </form><br><br>
+    <section id="actu"></section>
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="../utils/function.js"></script>
+<script src="../utils/home.js"></script>
+<script src="../utils/publication.js"></script>
+
+</html>
