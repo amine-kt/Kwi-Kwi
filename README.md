@@ -6,3 +6,5 @@ mail {
     identifiant = kwikwi.services@gmail.com
     password = *Azertyuiop9
 }
+
+test = vinc
