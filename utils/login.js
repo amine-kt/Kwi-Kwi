@@ -14,13 +14,7 @@ $('button').click((e) => { // lors du d'un clic sur un boutton
         success: (res, status) => {
             console.log(res); // Affiche le résultat de la requete
             if (res.success) { // Si l'utilisateur existe
-                localStorage.setItem("username", res.username); // Place dans le localstorage username avec en valeur la réponse de la requête username
-                localStorage.setItem("firstname", res.firstname); // Place dans le localstorage firstname avec en valeur la réponse de la requête firstname
-                localStorage.setItem("lastname", res.lastname); // Place dans le localstorage lastname avec en valeur la réponse de la requête lastname
-                localStorage.setItem("email", res.email); // Place dans le localstorage email avec en valeur la réponse de la requête email
-                localStorage.setItem("birthdate", res.birthdate); // Place dans le localstorage birthdate avec en valeur la réponse de la requête birthdate
-                localStorage.setItem("gender", res.gender); // Place dans le localstorage gender avec en valeur la réponse de la requête gender
-                localStorage.setItem("picture_profile", res.picture_profile); // Place dans le localstorage picture_profile avec en valeur la réponse de la requête picture_profile
+                localStorage.setItem('user', JSON.stringify(res.user)); // Stock dans le local storage toutes les info de l'user
                 window.location.replace('./home.html'); // Je le redirige ensuite vers l'home.html
             } else { //? Si l'utilisateur n'existe pas
                 $("#username_err").text(res.username_err); // Selestion la span avec l'id #username_err et ajoute le contenue de la variable d'erreur $username_err

@@ -6,3 +6,7 @@ mail {
     identifiant = kwikwi.services@gmail.com
     password = *Azertyuiop9
 }
+
+cd .\flux\
+composer install
+f1 reload window

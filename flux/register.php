@@ -25,8 +25,8 @@ $confirm_password = mysqli_real_escape_string($db, $_POST["confirm_password"]); 
 $gender = mysqli_real_escape_string($db, $_POST["gender"]); // stock l'envoie de l'input gender en plus d'empecher toute injection sql grâce à mysqli_real_escape_string
 
 // Selecteurs pour les vérification
-$select_email = mysqli_query($db, "SELECT * FROM user WHERE email = '" . $email . "'"); // Selecteur sql avec la fonction mysqli_query pour tester si l'email est déjà prit ou non plus bas dans le code
-$select_username = mysqli_query($db, "SELECT * FROM user WHERE username = '" . $username . "'"); // Selecteur sql avec la fonction mysqli_query pour tester si l'username est déjà prit ou non plus bas dans le code
+$select_email = mysqli_query($db, "SELECT email FROM user WHERE email = '" . $email . "'"); // Selecteur sql avec la fonction mysqli_query pour tester si l'email est déjà prit ou non plus bas dans le code
+$select_username = mysqli_query($db, "SELECT username FROM user WHERE username = '" . $username . "'"); // Selecteur sql avec la fonction mysqli_query pour tester si l'username est déjà prit ou non plus bas dans le code
 
 // Début des vérification des valeurs :
 if ($_SERVER["REQUEST_METHOD"] == "POST") { // Si on a requête avec une méthode POST (donc un envoie de formulaire)
@@ -116,31 +116,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { // Si on a requête avec une méthod
         $sql = "INSERT INTO `user` (firstname, lastname, birthdate, email, username, password, gender) VALUES ('{$firstname}', '{$lastname}', '{$birthdate}', '{$email}', '{$username}', '{$password}', '{$gender}')"; // Prépare la requête slq
         $db->query($sql); // Envoie à la bdd
 
-        $req = "SELECT * FROM `user` WHERE username = '$username'"; // Requête slq demandans l'username et le mot de passe de l'username
+        $req = "SELECT id_user, username, firstname, lastname, email, birthdate, gender, picture_profile FROM `user` WHERE username = '$username'"; // Requête slq demandans l'username et le mot de passe de l'username
         $res = $db->query($req); // Execute la requête sql
 
         if ($data = mysqli_fetch_assoc($res)) {
-            $id_user = $data['id_user'];
-            $picture_profile = $data['picture_profile'];
-            mkdir("../images/{$id_user}/picture_profile", 0777, true); // 0777 correspond au maximum de droits possible et le "true" renvoie true en cas de succès.
-            mkdir("../images/{$id_user}/picture_post", 0777, true);
+            $_SESSION['connected'] = true;
+            $_SESSION['user'] = $data['id_user'];
+            mkdir("../images/{$data['id_user']}/picture_profile", 0777, true); // 0777 correspond au maximum de droits possible et le "true" renvoie true en cas de succès.
+            mkdir("../images/{$data['id_user']}/picture_post", 0777, true);
+            echo json_encode(['success' => true, 'user' => $data]); // Envoie au js que c'est un succès
+            die(); // stop l'envoie d'info au js
         }
-
-        $_SESSION['connected'] = true;
-
-        $_SESSION['user'] = [
-            'username' => $username,
-            'firstname' => $firstname,
-            'lastname' => $lastname,
-            'email' => $email,
-            'birthdate' => $birthdate,
-            'gender' => $gender,
-            'picture_profile' => $picture_profile,
-            'password' => $password,
-            'id_user' => $id_user
-        ];
-        echo json_encode(['success' => true, 'username' => $username, 'firstname' => $firstname, 'lastname' => $lastname, 'email' => $email, 'birthdate' => $birthdate, 'gender' => $gender, 'picture_profile' => $picture_profile]); // Envoie au js que c'est un succès
-        die(); // stop l'envoie d'info au js
-        $rep = smtpMailer($_SESSION['user']['email'], 'Bienvenue dans la Kwikwi-sphere', "Merci de votre inscription{$_SESSION['user']['username']}");
+        // $rep = smtpMailer($_SESSION['user']['email'], 'Bienvenue dans la Kwikwi-sphere', "Merci de votre inscription{$_SESSION['user']['username']}");
     }
 }

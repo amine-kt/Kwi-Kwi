@@ -1,12 +1,14 @@
 picture_profile();
 
 // __________________ Déclaration des variables ustiles______________________
-let username = localStorage.getItem('username'); // Créer une variable username qui récupère l'username du localstorage
-let firstname = localStorage.getItem('firstname'); // Créer une variable firstname qui récupère le firstname du localstorage
-let lastname = localStorage.getItem('lastname'); // Créer une variable lastname qui récupère le lastname du localstorage
-let email = localStorage.getItem('email'); // Créer une variable email qui récupère l'email du localstorage
-let birthdate = localStorage.getItem('birthdate'); // Créer une variable birthdate qui récupère la birthdate du localstorage
-let gender = localStorage.getItem('gender'); // Créer une variable gender qui récupère le gender du localstorage
+// onload
+let user = JSON.parse(localStorage.getItem('user'));
+let firstname = user.firstname;
+let lastname = user.lastname;
+let username = user.username;
+let email = user.email;
+let birthdate = user.birthdate;
+let gender = user.gender;
 let edition = 0; // Variable qui va servire à savoire si l'utilisateur est en train d'editer 0, 1 ou 2 donnée(s). Par défault 0.
 
 // ___ Place certain éléments invisible au chargement et place les données du localstorage pour le friendlyuser ___
@@ -105,11 +107,9 @@ $("button").eq(4).click((e) => { // lors du d'un clic sur un boutton
         },
         dataType: "json",
         success: (res, status) => { // Affiche le résultat de la requete
-            console.log(res);
             if (res.success) { //? Si l'utilisateur existe
-                localStorage.setItem("username", res.username); // Je stock dans mon local storage l'username de l'utilisateur authentifié
-                localStorage.setItem("email", res.email); // Je stock dans mon local storage l'email de l'utilisateur authentifié
-                window.location.replace('./profile.html'); // Je le redirige ensuite vers l'home.html
+                localStorage.setItem('user', JSON.stringify(res.user));
+                document.location.reload(); // Je le redirige ensuite vers l'home.html
             } else { // Sinon affiche les messages messages d'erreur
                 $("#email_err").text(res.email_err); // Selestion la span avec l'id #email_err et ajoute le contenue de la variable d'erreur $email_err
                 $("#username_err").text(res.username_err); // Selestion la span avec l'id #username_err et ajoute le contenue de la variable d'erreur $username_err
