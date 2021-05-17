@@ -2,6 +2,8 @@
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+require('vendor/autoload.php');
+
 
 function resultAsArray($res)
 { // Prend le résultat d'une requête en paramètre
@@ -15,7 +17,6 @@ function resultAsArray($res)
 
 
 
-require('vendor/autoload.php');
 
 function smtpMailer($to, $subject, $body)
 {

@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-require_once('../utils/db_connect.php'); // Fait appel au fichier php de connexion à la bdd
-require_once('../utils/function.php'); // Fait appel au fichier php des fonctions
+require_once('../utils/php/db_connect.php'); // Fait appel au fichier php de connexion à la bdd
+require_once('../utils/php/function.php'); // Fait appel au fichier php des fonctions
 
 
 //_______________ Stockage du contenue des input dans des variables _______________________________
@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { // Si on a requête avec une méthod
                     'picture_profile' => $picture_profile,
                     'id_user' => $id_user
                 ];
-                echo json_encode(['success' => true, 'username' => $username, 'firstname' => $firstname, 'lastname' => $lastname, 'email' => $email, 'birthdate' => $birthdate, 'gender' => $gender, 'picture_profile' => $picture_profile]);
+                echo json_encode(['success' => true, 'username' => $username,"id_user"=>$id_user, 'firstname' => $firstname, 'lastname' => $lastname, 'email' => $email, 'birthdate' => $birthdate, 'gender' => $gender, 'picture_profile' => $picture_profile]);
                 die(); // Stop l'envoie au js
             } else { // Si le mot de passe ne correspond pas alors
                 $password_err = "*Mot de passe incorrecte"; // Déclare la variable d'erreur au mot de passe

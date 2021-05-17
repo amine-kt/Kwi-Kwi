@@ -1,7 +1,7 @@
 function noconnected() { // Fonction noconnected
     $(window).on('load', function() { // Au chargement de la page lance la fonction suivante
         $.ajax({ // Requête ajax
-            url: "../utils/connected.php", // dirigé vers le fichier connected.php
+            url: "./utils/php/connected.php", // dirigé vers le fichier connected.php
             type: "POST", // Type d'envoie POST
             datatype: "json", // Type de donnée json
             success: (res, status) => { // réponse avec success
@@ -17,7 +17,7 @@ function noconnected() { // Fonction noconnected
 function connected() { // Fonction connected
     $(window).on('load', function() { // Au chargement de la page lance la fonction :
         $.ajax({ // Requête ajax
-            url: "../utils/connected.php", // Envoie vers le fichier php connected.php
+            url: "./utils/php/connected.php", // Envoie vers le fichier php connected.php
             type: "POST", // Type d'envoie en POST
             datatype: "json", // Type de de data json
             success: (res, status) => { // réponse avec success
@@ -43,9 +43,10 @@ function empty_comm(idpubli) {
 function like(idpubli) {
 
     $.ajax({
-        url: "../flux/like.php",
+        url: "./flux/publication.php",
         type: "POST",
         data: {
+            method: 'like',
             id_publi: idpubli,
         },
         dataType: "json",
@@ -64,9 +65,10 @@ function comment(idpubli) {
 
 function like_comment(idcomment) {
     $.ajax({
-        url: "../flux/like_comment.php",
+        url: "./flux/comment.php",
         type: "POST",
         data: {
+            method: 'like',
             idcomment: idcomment,
         },
         dataType: "json",
@@ -80,9 +82,10 @@ function delete_p(idpubli) {
     let rep = confirm("Etes-vous sur de vouloir supprimer ce Kwi-Kwi")
     if (rep) {
         $.ajax({
-            url: "../flux/delete_publi.php",
+            url: "./flux/publication.php",
             type: "POST",
             data: {
+                method: 'delete',
                 idpubli: idpubli,
             },
             dataType: "json",
@@ -97,9 +100,10 @@ function delete_c(idcomment) {
     let rep = confirm("Etes-vous sur de vouloir supprimer ce commentaire")
     if (rep) {
         $.ajax({
-            url: "../flux/delete_comment.php",
+            url: "./flux/comment.php",
             type: "POST",
             data: {
+                method: 'delete',
                 idcomment: idcomment,
             },
             dataType: "json",
@@ -112,9 +116,10 @@ function delete_c(idcomment) {
 
 function see_comment(idpubli) {
     $.ajax({
-        url: "../flux/comment.php",
+        url: "./flux/publication.php",
         type: "POST",
         data: {
+            method: 'comment',
             idpubli: idpubli,
         },
         dataType: "json",

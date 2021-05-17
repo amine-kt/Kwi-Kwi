@@ -4,7 +4,7 @@ require_once('../utils/db_connect.php'); // Fait appel au fichier php de connexi
 require_once('../utils/function.php'); // Fait appel au fichier php des fonctions
 
 $id_user = $_SESSION['user']['id_user']; // Récupère l'id de l'user
-$target_dir = "../images/$id_user/picture_profile/"; // Chemin ou l'image va s'enregistrer
+$target_dir = "./images/$id_user/picture_profile/"; // Chemin ou l'image va s'enregistrer
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]); // Chemin avec l'image ou elle va être enregistrer
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));

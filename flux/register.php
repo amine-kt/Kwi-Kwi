@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-require_once('../utils/db_connect.php'); //appel la connexion à la bdd grâce au fichier db_connect.php
-require_once('../utils/function.php'); // Fait appel au fichier php des fonctions
+require_once('../utils/php/db_connect.php'); //appel la connexion à la bdd grâce au fichier db_connect.php
+require_once('../utils/php/function.php'); // Fait appel au fichier php des fonctions
 
 // Liste de tout les regex
 $regex_date = "/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/";
@@ -122,8 +122,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { // Si on a requête avec une méthod
         if ($data = mysqli_fetch_assoc($res)) {
             $id_user = $data['id_user'];
             $picture_profile = $data['picture_profile'];
-            mkdir("../images/{$id_user}/picture_profile", 0777, true); // 0777 correspond au maximum de droits possible et le "true" renvoie true en cas de succès.
-            mkdir("../images/{$id_user}/picture_post", 0777, true);
+            mkdir("./images/{$id_user}/picture_profile", 0777, true); // 0777 correspond au maximum de droits possible et le "true" renvoie true en cas de succès.
+            mkdir("./images/{$id_user}/picture_post", 0777, true);
         }
 
         $_SESSION['connected'] = true;
@@ -139,8 +139,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { // Si on a requête avec une méthod
             'password' => $password,
             'id_user' => $id_user
         ];
-        echo json_encode(['success' => true, 'username' => $username, 'firstname' => $firstname, 'lastname' => $lastname, 'email' => $email, 'birthdate' => $birthdate, 'gender' => $gender, 'picture_profile' => $picture_profile]); // Envoie au js que c'est un succès
-        die(); // stop l'envoie d'info au js
         $rep = smtpMailer($_SESSION['user']['email'], 'Bienvenue dans la Kwikwi-sphere', "Merci de votre inscription{$_SESSION['user']['username']}");
+        echo json_encode(['success' => true, 'username' => $username,'id_user'=>$id_user, 'firstname' => $firstname, 'lastname' => $lastname, 'email' => $email, 'birthdate' => $birthdate, 'gender' => $gender, 'picture_profile' => $picture_profile]); // Envoie au js que c'est un succès
+        die(); // stop l'envoie d'info au js
     }
 }

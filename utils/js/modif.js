@@ -30,20 +30,20 @@ noconnected(); // Appel la fonction noconnected
 
 // 1er Button : Modifier l'Username
 $('button').eq(0).click((e) => { // lors du d'un clic sur un boutton
-    e.preventDefault(); // Empêche tout action par défault des boutton
-    $("button").eq(0).css("display", "none"); // Cache le premier bouton modifier
-    $("button").eq(1).css("display", "initial"); // Affiche le deuxième bouton, le boutton "Annuler"
-    $("#username").css("display", "initial"); // Affiche l'inpute avec l'id username
-    $('label').eq(5).css("display", "none"); // Cache le sixième label celui de qui afficher l'username de l'utilisateur
-    edition++; // Ajoute 1 à la variable edition
-    // affiche le password à remplire
-    $('label').eq(12).css("display", "initial"); // Affiche le label password
-    $('input').eq(2).css("display", "initial"); // Affiche l'inpute du password
-    $('button').eq(4).css("display", "initial"); // Affiche le bouton valider du formulaire
-    // cache le bouton modifier de username
-    $('button').eq(5).css("display", "none"); // Cache le bouton modifier mon password
-})
-// 1er Button : Annuler la modification de l'username
+        e.preventDefault(); // Empêche tout action par défault des boutton
+        $("button").eq(0).css("display", "none"); // Cache le premier bouton modifier
+        $("button").eq(1).css("display", "initial"); // Affiche le deuxième bouton, le boutton "Annuler"
+        $("#username").css("display", "initial"); // Affiche l'inpute avec l'id username
+        $('label').eq(5).css("display", "none"); // Cache le sixième label celui de qui afficher l'username de l'utilisateur
+        edition++; // Ajoute 1 à la variable edition
+        // affiche le password à remplire
+        $('label').eq(12).css("display", "initial"); // Affiche le label password
+        $('input').eq(2).css("display", "initial"); // Affiche l'inpute du password
+        $('button').eq(4).css("display", "initial"); // Affiche le bouton valider du formulaire
+        // cache le bouton modifier de username
+        $('button').eq(5).css("display", "none"); // Cache le bouton modifier mon password
+    })
+    // 1er Button : Annuler la modification de l'username
 $('button').eq(1).click((e) => { // lors du d'un clic sur un boutton
     e.preventDefault(); // Empêche tout action par défault des boutton
     $('button').eq(1).css("display", "none");
@@ -96,7 +96,7 @@ $('button').eq(3).click((e) => { // lors du d'un clic sur un boutton
 $("button").eq(4).click((e) => { // lors du d'un clic sur un boutton
     e.preventDefault(); // Empêche tout action par défault des boutton
     $.ajax({ // début de la requête ajax
-        url: "../flux/modif.php", // Redirige les données vers le fichier php login.php
+        url: "./flux/modif.php", // Redirige les données vers le fichier php login.php
         type: "POST", // Le type de la requête est de POST
         data: { // La data envoyer contient :
             username: $("#username").val(), // Valeur de l'input fomulaire correspondant à mon username

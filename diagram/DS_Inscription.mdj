@@ -664,9 +664,9 @@
 												"$ref": "AAAAAAF5VabP4OhZQ70="
 											},
 											"font": "Arial;13;0",
-											"left": 448,
+											"left": 445,
 											"top": 196,
-											"width": 58.54443359375,
+											"width": 65.04443359375,
 											"height": 13,
 											"alpha": 1.5707963267948966,
 											"distance": 10,
@@ -674,7 +674,7 @@
 												"$ref": "AAAAAAF5VabP4ehaY2s="
 											},
 											"edgePosition": 1,
-											"text": "3 : répone"
+											"text": "3 : réponse"
 										},
 										{
 											"_type": "EdgeLabelView",
@@ -905,7 +905,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF5VZ0/j+asuk4="
 							},
-							"name": "répone",
+							"name": "réponse",
 							"source": {
 								"$ref": "AAAAAAF5VaRsoufHYmw="
 							},
@@ -976,7 +976,8 @@
 					"_parent": {
 						"$ref": "AAAAAAF5VZ0/j+arKSQ="
 					},
-					"name": "Role1"
+					"name": "Role1",
+					"type": ""
 				},
 				{
 					"_type": "UMLAttribute",
@@ -984,7 +985,8 @@
 					"_parent": {
 						"$ref": "AAAAAAF5VZ0/j+arKSQ="
 					},
-					"name": "Role2"
+					"name": "Role2",
+					"type": ""
 				},
 				{
 					"_type": "UMLAttribute",
@@ -992,7 +994,8 @@
 					"_parent": {
 						"$ref": "AAAAAAF5VZ0/j+arKSQ="
 					},
-					"name": "Role3"
+					"name": "Role3",
+					"type": ""
 				}
 			]
 		}

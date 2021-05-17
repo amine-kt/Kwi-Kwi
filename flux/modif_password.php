@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once('../utils/db_connect.php');
-require_once('../utils/function.php');
+require_once('../utils/php/db_connect.php');
+require_once('../utils/php/function.php');
 
 $regex_password = "/(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/";
 
