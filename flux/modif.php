@@ -13,7 +13,7 @@ $username = mysqli_real_escape_string($db, $_POST['username']);
 $email = mysqli_real_escape_string($db, $_POST["email"]);
 $password = mysqli_real_escape_string($db, $_POST["password"]);
 
-$req = "SELECT username, firstname, lastname, email, birthdate, gender, picture_profile, password FROM `user` WHERE id_user = {$_SESSION['user']}"; // Requête slq demandans l'username et le mot de passe de l'username
+$req = "SELECT username, firstname, lastname, email, birthdate, gender, picture_profile, password FROM `user` WHERE id_user = {$_SESSION['user']['id_user']}"; // Requête slq demandans l'username et le mot de passe de l'username
 $res = $db->query($req); // Execute la requête sql
 
 $data = mysqli_fetch_assoc($res);
@@ -68,12 +68,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $username_bdd = $data['username'];
             $sql = "UPDATE user SET username='{$username}', email = '{$email}' WHERE username='{$username_bdd}'"; // Prépare la requête slq
             $db->query($sql); // Envoie à la bdd
-
-            // $req = "SELECT id_user, username, firstname, lastname, email, birthdate, gender, picture_profile FROM `user` WHERE username = {$_SESSION['user']}"; // Requête slq demandans l'username et le mot de passe de l'username
-            // $res = $db->query($req); // Execute la requête sql
-            // $data = mysqli_fetch_assoc($res);
-            // echo $data;
-            echo json_encode(['success' => true, 'user' => $data]);
+            $_SESSION['user']['email'] = $email;
+            $_SESSION['user']['username'] = $username;
+            echo json_encode(['success' => true, 'email' => $email, 'username' => $username]);
             die();
         } else {
             $password_err = "*Mot de passe incorrect"; // Si vide déclare la variable d'erreur

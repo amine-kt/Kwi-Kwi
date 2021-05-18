@@ -26,43 +26,43 @@
         <form>
             <!-- Prénom, Nom -->
             <label>Firstname :</label>
-            <label></label><br>
+            <label id="lab_fi"></label><br>
             <label>Lastname :</label>
-            <label></label><br>
+            <label id="lab_la"></label><br>
 
             <!-- Username -->
             <label for="username">Username :</label>
-            <label></label>
+            <label id="lab_us"></label>
             <input type="text" name="username" id="username">
-            <button>Modifier</button>
-            <button>Annuler</button>
+            <button id="edit_us">Modifier</button>
+            <button id="cancel_us">Annuler</button>
             <span id="username_err"></span><br>
 
             <!-- Email -->
             <label for="email">Email :</label>
-            <label></label>
+            <label id="lab_em"></label>
             <input type="text" name="email" id="email">
-            <button>Modifier</button>
-            <button>Annuler</button>
+            <button id="modif_em" >Modifier</button>
+            <button id="cancel_em">Annuler</button>
             <span id="email_err"></span><br>
 
             <!-- Birthdate -->
             <label>Birthdate :</label>
-            <label></label><br>
+            <label id="lab_bi"></label><br>
             <label>Gender :</label>
-            <label></label><br><br>
+            <label id="lab_ge"></label><br><br>
 
             <!-- Mot de passe -->
-            <label for="password">Password :</label>
+            <label for="password" id="lab_pa">Password :</label>
             <input type="password" placeholder="••••••••" name="password" id="password">
-            <button>Valider</button>
+            <button id="valider">Valider</button>
             <span id="password_err"></span>
 
 
         </form>
 
         <!-- lien redirige vers la page de modification du mot de passe -->
-        <a href="./modif_password.html"><button>Modifier mon password</button></a>
+        <button id="modif_pass">Modifier mon password</button>
 
     </main>
 </body>

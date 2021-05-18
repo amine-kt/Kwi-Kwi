@@ -34,7 +34,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { // Si on a requête avec une méthod
         if ($data = mysqli_fetch_assoc($res)) { // Test si une corespondance dans la variable stock les résultat dans la variable
 
             if (password_verify($password, $data["password"])) { // Vérifie le password en le comparant avec le hash du password de la bdd
-                $_SESSION['user'] = $data['id_user'];
+                $_SESSION['user'] = [
+                    'id_user' => $data['id_user'],
+                    'email' => $data['email'],
+                    'username' => $data['username']
+                ];
                 $_SESSION['connected'] = true;
                 echo json_encode(['success' => true, 'user' => $data]);
                 die(); // Stop l'envoie au js

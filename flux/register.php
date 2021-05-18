@@ -121,7 +121,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { // Si on a requête avec une méthod
 
         if ($data = mysqli_fetch_assoc($res)) {
             $_SESSION['connected'] = true;
-            $_SESSION['user'] = $data['id_user'];
+            $_SESSION['user'] = [
+                'id_user' => $data['id_user'],
+                'email' => $data['email'],
+                'username' => $data['username']
+            ];
             mkdir("../images/{$data['id_user']}/picture_profile", 0777, true); // 0777 correspond au maximum de droits possible et le "true" renvoie true en cas de succès.
             mkdir("../images/{$data['id_user']}/picture_post", 0777, true);
             echo json_encode(['success' => true, 'user' => $data]); // Envoie au js que c'est un succès
