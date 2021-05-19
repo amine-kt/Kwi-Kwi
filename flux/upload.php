@@ -3,7 +3,7 @@ session_start(); // Démare la session
 require_once('../utils/db_connect.php'); // Fait appel au fichier php de connexion à la bdd
 require_once('../utils/function.php'); // Fait appel au fichier php des fonctions
 
-$id_user = $_SESSION['user']; // Récupère l'id de l'user
+$id_user = $_SESSION['user']['id_user']; // Récupère l'id de l'user
 $file_err = NULL;
 
 if (isset($_FILES['file']['name'])) {
@@ -30,13 +30,10 @@ if (isset($_FILES['file']['name'])) {
         }
 
         if (move_uploaded_file($_FILES['file']['tmp_name'], $location)) { // SI l'envoie du fichier se fait à la destination
-            $sql = "UPDATE user SET picture_profile=$location WHERE id_user='{$_SESSION['user']}'"; // Prépare la requête slq
+            $sql = "UPDATE user SET picture_profile='$location' WHERE id_user=$id_user"; // Prépare la requête slq
             $db->query($sql); // Envoie à la bdd
 
-            $req = "SELECT id_user, username, firstname, lastname, email, birthdate, gender, picture_profile FROM `user` WHERE username = {$_SESSION['user']}"; // Requête slq demandans l'username et le mot de passe de l'username
-            $res = $db->query($req); // Execute la requête sql
-            $data = mysqli_fetch_assoc($res);
-            echo json_encode(['success' => true, 'user' => $data]);
+            echo json_encode(['success' => true, 'picture_profile' => $location]);
             die();
         } else {
             $file_err = "Une erreur innatendue est survenue";

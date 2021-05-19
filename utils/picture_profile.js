@@ -17,13 +17,13 @@ $("#upload").click((e) => {
         contentType: false,
         processData: false,
         success: (res, status) => {
-            console.log(res);
-            console.log(res.picture_profile)
             if (res.success) { //? Si l'utilisateur existe
-                localStorage.setItem("picture_profile", res.picture_profile); // Place dans le localstorage picture_profile avec en valeur la réponse de la requête picture_profile
+                let user = JSON.parse(localStorage.getItem('user'));
+                user.picture_profile = res.picture_profile;
+                localStorage.setItem('user', JSON.stringify(user));
                 window.location.replace('./profile.html'); // Je le redirige ensuite vers l'home.html
             } else { // Sinon affiche les messages messages d'erreur
-                $(".file_err").text(res.file_err); // Selectione la span avec l'id #file_err et ajoute le contenue de la variable d'erreur $file_err
+                $("#file_err").text(res.file_err); // Selectione la span avec l'id #file_err et ajoute le contenue de la variable d'erreur $file_err
             }
         }
     })

@@ -21,13 +21,11 @@
         <h1>Votre Profil</h1>
     </header>
     <main>
-        <img src="" alt="" class="picture_profile" height="100px">
+        <img src="" alt="" class="picture_profile" height="100px"><br>
         <a href="./picture_profile.html">Modifier votre photo de profile</a>
         <form>
             <!-- Prénom, Nom -->
-            <label>Firstname :</label>
-            <label id="lab_fi"></label><br>
-            <label>Lastname :</label>
+            <br><label id="lab_fi"></label><br>
             <label id="lab_la"></label><br>
 
             <!-- Username -->
@@ -42,14 +40,12 @@
             <label for="email">Email :</label>
             <label id="lab_em"></label>
             <input type="text" name="email" id="email">
-            <button id="modif_em" >Modifier</button>
+            <button id="modif_em">Modifier</button>
             <button id="cancel_em">Annuler</button>
             <span id="email_err"></span><br>
 
             <!-- Birthdate -->
-            <label>Birthdate :</label>
             <label id="lab_bi"></label><br>
-            <label>Gender :</label>
             <label id="lab_ge"></label><br><br>
 
             <!-- Mot de passe -->
@@ -62,7 +58,7 @@
         </form>
 
         <!-- lien redirige vers la page de modification du mot de passe -->
-        <button id="modif_pass">Modifier mon password</button>
+        <a href="./modif_password.html" id="modif_pass">Modifier mon password</a href="./modif_password.html">
 
     </main>
 </body>

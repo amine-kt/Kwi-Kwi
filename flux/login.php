@@ -39,6 +39,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { // Si on a requête avec une méthod
                     'email' => $data['email'],
                     'username' => $data['username']
                 ];
+
+                unset($data['password']);
+
                 $_SESSION['connected'] = true;
                 echo json_encode(['success' => true, 'user' => $data]);
                 die(); // Stop l'envoie au js

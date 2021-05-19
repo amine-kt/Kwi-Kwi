@@ -128,6 +128,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { // Si on a requête avec une méthod
             ];
             mkdir("../images/{$data['id_user']}/picture_profile", 0777, true); // 0777 correspond au maximum de droits possible et le "true" renvoie true en cas de succès.
             mkdir("../images/{$data['id_user']}/picture_post", 0777, true);
+            unset($data['password']);
             echo json_encode(['success' => true, 'user' => $data]); // Envoie au js que c'est un succès
             die(); // stop l'envoie d'info au js
         }

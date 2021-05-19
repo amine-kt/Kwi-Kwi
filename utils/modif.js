@@ -1,5 +1,3 @@
-noconnected(); // Appel la fonction noconnected
-picture_profile();
 
 // __________________ Déclaration des variables ustiles______________________
 
@@ -12,22 +10,24 @@ let birthdate = user.birthdate;
 let gender = user.gender;
 
 // ___ Place certain éléments invisible au chargement et place les données du localstorage pour le friendlyuser ___
-$('#lab_fi').text(firstname); // Sélectione le deuxième label du formulaire pour afficher le prénom de l'utilisateur
-$('#lab_la').text(lastname); // Sélectione le quatrième label du formulaire pour afficher le nom de l'utilisateur
+$('#lab_fi').text("Firstname : " + firstname); // Sélectione le deuxième label du formulaire pour afficher le prénom de l'utilisateur
+$('#lab_la').text("Lastname : " + lastname); // Sélectione le quatrième label du formulaire pour afficher le nom de l'utilisateur
 $('#lab_us').text(username); // Sélectione le sixième label du formulaire pour afficher le l'username de l'utilisateur et ajoute l'username du localstorage dans le placeholder
 $('#username').attr("placeholder", username).css("display", "none"); // Cache l'inpute de l'username
 $('#cancel_us').css("display", "none"); // Cache le bouton annuler de l'username
 $('#lab_em').text(email); // Sélectione le huitième label du formulaire pour afficher l'email de l'utilisateur
 $('#email').attr("placeholder", email).css("display", "none"); // Cache l'inpute de l'email et ajoute l'email du localstorage dans le placeholder
 $('#cancel_em').css("display", "none"); // Cache le bouton annuler de l'email
-$('#lab_bi').text(birthdate); // Affiche l'email actuelle dans le labelle email
-$('#lab_ge').text(gender); // Affiche le genre dans le label genre
+$('#lab_bi').text("Birthdate : " + birthdate); // Affiche l'email actuelle dans le labelle email
+$('#lab_ge').text("Gender : " + gender); // Affiche le genre dans le label genre
 $('#lab_pa').css("display", "none"); // Cache le label password
 $('#password').css("display", "none"); // Cache l'inpute du password
 $('#valider').css("display", "none"); // Cache le bouton valider du formulaire
 
 
 let edition = 0; // Variable qui va servire à savoire si l'utilisateur est en train d'editer 0, 1 ou 2 donnée(s). Par défault 0.
+picture_profile();
+noconnected(); // Appel la fonction noconnected
 
 // 1er Button : Modifier l'Username
 $('#edit_us').click((e) => { // lors du d'un clic sur un boutton
@@ -92,10 +92,6 @@ $('#cancel_em').click((e) => { // lors du d'un clic sur un boutton
         $('#valider').css("display", "none"); // Cache le bouton valider du formulaire
         $("#modif_pass").css("display", "initial"); // Cache le bouton modifier mon password
     }
-})
-
-$("#modif_pass").click(() => {
-    window.location.replace('./modif_password.html');
 })
 
 $("#valider").click((e) => { // lors du d'un clic sur un boutton
