@@ -56,9 +56,6 @@ $("button#send").click((e) => {
     })
 })
 
-
-
-
 $.ajax({
     url: "./modules/home/publication/publication.php",
     type: "POST",
@@ -69,21 +66,28 @@ $.ajax({
     success: (res, status) => {
         if (res.success == true) {
             jQuery.each(res.result, function (i, val) {
-                $("#actu").append("<div id=" + val.idpublication + " data=" + val.user_id_user + ">" +
-                    "<img src='" + val.picture_profile + "' height='70px'><span>" + val.username + " a Kwikwi le " + val.date_publi + ":</span><br>" +
-                    val.content +
-                    "<br><button onclick='like(" + val.idpublication + ")'>like : " + val.like + "</button>" +
-                    "<button onclick='comment(" + val.idpublication + ")'>Commenter</button>" +
-                    "<button id='oracle" + val.idpublication + "' onclick='see_comment(" + val.idpublication + ")'>voir commentaire</button>" +
-                    "<button id='delete' onclick='delete_p(" + val.idpublication + ")'>Supprimer</button>" +
-                    "<div id='see_comment" + val.idpublication + "'></div>" +
-                    "<br><br>" +
-                    "</div>")
-                // if ($('div#' + val.idpublication).attr('data') != localStorage.getItem('id')) {
-                //     $('button#delete').css('display', 'none')
-                // } else {
-                //     $('button#delete').css('display', 'initial')
-                // }
+                if (res.user == val.user_id_user) {
+                    $("#actu").append("<div id=" + val.idpublication + " data=" + val.user_id_user + ">" +
+                        "<img src='" + val.picture_profile + "' height='70px'><span>" + val.username + " a Kwikwi le " + val.date_publi + ":</span><br>" +
+                        val.content +
+                        "<br><button onclick='like(" + val.idpublication + ")'>like : " + val.like + "</button>" +
+                        "<button onclick='comment(" + val.idpublication + ")'>Commenter</button>" +
+                        "<button id='oracle" + val.idpublication + "' onclick='see_comment(" + val.idpublication + ")'>voir commentaire</button>" +
+                        "<button id='delete' onclick='delete_p(" + val.idpublication + ")'>Supprimer</button>" +
+                        "<div id='see_comment" + val.idpublication + "'></div>" +
+                        "<br><br>" +
+                        "</div>")
+                } else if (res.user != val.user_id_user) {
+                    $("#actu").append("<div id=" + val.idpublication + " data=" + val.user_id_user + ">" +
+                        "<img src='" + val.picture_profile + "' height='70px'><span>" + val.username + " a Kwikwi le " + val.date_publi + ":</span><br>" +
+                        val.content +
+                        "<br><button onclick='like(" + val.idpublication + ")'>like : " + val.like + "</button>" +
+                        "<button onclick='comment(" + val.idpublication + ")'>Commenter</button>" +
+                        "<button id='oracle" + val.idpublication + "' onclick='see_comment(" + val.idpublication + ")'>voir commentaire</button>" +
+                        "<div id='see_comment" + val.idpublication + "'></div>" +
+                        "<br><br>" +
+                        "</div>")
+                }
             })
         }
     }
