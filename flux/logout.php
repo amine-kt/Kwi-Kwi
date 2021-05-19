@@ -7,5 +7,5 @@ session_destroy();
 $_SESSION['connected'] = false;
 // test
 
-header("location: ../html/login.html");
+header("location: ../login.html");
 exit;

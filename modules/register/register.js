@@ -1,10 +1,11 @@
 connected(); // Appel de la fonction connected
+
 // ______________ Lors de l'apuie sur le bouton register _________________________
 $("button").click((e) => { // lors du d'un clic sur un boutton
     e.preventDefault(); // Empêche tout action par défault des boutton
 
     $.ajax({ // début de la requête ajax
-        url: "../flux/register.php", // Redirige les données vers le fichier php register.php
+        url: "./modules/register/register.php", // Redirige les données vers le fichier php register.php
         type: "POST", // Le type de la requête est de POST
         data: { // La data envoyer contient :
             firstname: $("#firstname").val(), // Valeur de l'input fomulaire correspondant à mon firstname

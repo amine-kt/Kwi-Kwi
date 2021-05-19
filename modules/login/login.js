@@ -4,7 +4,7 @@ $('button').click((e) => { // lors du d'un clic sur un boutton
     e.preventDefault(); // Empêche tout action par défault des boutton
 
     $.ajax({ // début de la requête ajax
-        url: "../flux/login.php", // Redirige les données vers le fichier php login.php
+        url: "./modules/login/login.php", // Redirige les données vers le fichier php login.php
         type: "POST", // Le type de la requête est de POST
         data: { // La data envoyer contient :
             username: $('#username').val(), // Valeur de l'input fomulaire correspondant à mon username
@@ -12,7 +12,6 @@ $('button').click((e) => { // lors du d'un clic sur un boutton
         }, // Fin de l'envoie de donner au fichier login.php
         dataType: "json", // Le type de donner en json
         success: (res, status) => {
-            console.log(res); // Affiche le résultat de la requete
             if (res.success) { // Si l'utilisateur existe
                 localStorage.setItem('user', JSON.stringify(res.user)); // Stock dans le local storage toutes les info de l'user
                 window.location.replace('./home.html'); // Je le redirige ensuite vers l'home.html

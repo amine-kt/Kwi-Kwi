@@ -1,7 +1,8 @@
 <?php
 session_start();
-require_once('../utils/db_connect.php');
-require_once('../utils/function.php');
+require_once('../../utils/db_connect.php');
+require_once('../../utils/function.php');
+require('../../flux/vendor/autoload.php');
 
 $regex_mail = '/(?:[a-z0-9!#$%&\'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+\/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/';
 $regex_username = "/^[a-zA-Z][a-zA-Z0-9-_\.]{5,}$/";
@@ -13,18 +14,13 @@ $username = mysqli_real_escape_string($db, $_POST['username']);
 $email = mysqli_real_escape_string($db, $_POST["email"]);
 $password = mysqli_real_escape_string($db, $_POST["password"]);
 
-$req = "SELECT username, firstname, lastname, email, birthdate, gender, picture_profile, password FROM `user` WHERE id_user = {$_SESSION['user']['id_user']}"; // Requête slq demandans l'username et le mot de passe de l'username
-$res = $db->query($req); // Execute la requête sql
-
-$data = mysqli_fetch_assoc($res);
-// print_r($data);
-
 // Selecteurs pour les vérification initial
-$select_email = $data['email']; // Selecteur sql avec la fonction mysqli_query pour tester si l'email est déjà prit ou non plus bas dans le code
-$select_username = $data['username']; // Selecteur sql avec la fonction mysqli_query pour tester si l'username est déjà prit ou non plus bas dans le code
+$select_email = $_SESSION['user']['email']; // Selecteur sql avec la fonction mysqli_query pour tester si l'email est déjà prit ou non plus bas dans le code
+$select_username = $_SESSION['user']['username']; // Selecteur sql avec la fonction mysqli_query pour tester si l'username est déjà prit ou non plus bas dans le code
 // Selecteurs pour les vérification final
-$select_email_bdd = mysqli_query($db, "SELECT email FROM user WHERE email = '" . $email . "'"); // Selecteur sql avec la fonction mysqli_query pour tester si l'email est déjà prit ou non plus bas dans le code
-$select_username_bdd = mysqli_query($db, "SELECT username FROM user WHERE username = '" . $username . "'"); // Selecteur sql avec la fonction mysqli_query pour tester si l'username est déjà prit ou non plus bas dans le code
+$select_email_bdd = mysqli_query($db, "SELECT * FROM user WHERE email = '" . $email . "'"); // Selecteur sql avec la fonction mysqli_query pour tester si l'email est déjà prit ou non plus bas dans le code
+$select_username_bdd = mysqli_query($db, "SELECT * FROM user WHERE username = '" . $username . "'"); // Selecteur sql avec la fonction mysqli_query pour tester si l'username est déjà prit ou non plus bas dans le code
+
 
 //? toute les conditions que vous vouyez permettent de verifier si les informations qu'il veut modifier sont au bon format puis de l'envoyer a la base de données
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -33,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email = $select_email;
     } elseif (!preg_match($regex_mail, $email)) { // Test le regex de l'email
         $email_err = "*L'email n'est pas au bon format"; // Déclare la variable d'erreur
-    } elseif (strlen(trim($email)) > 253) { // Test la longueur de l'email si supérieur à 253 caractères
+    } elseif (strlen(trim($email)) > 253) { // Test la longueur de l'email si supérieur à 253
         $email_err = "*L'email est trop grande"; // Si supérieur alors déclare la variable d'erreur
     } elseif ($select_email != $email) { // Test si l'email est déjà prit avec la fonction mysqli_num_rows et le sélécteur préparé plus haut dans le code
         if (mysqli_num_rows($select_email_bdd)) { // Test si l'email est déjà prit avec la fonction mysqli_num_rows et le sélécteur préparé plus haut dans le code
@@ -62,15 +58,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo json_encode(['success' => false, 'username_err' => $username_err, 'email_err' => $email_err, 'password_err' => $password_err]);
         die(); // Stop l'envoie au js
     } else { // Si pas d'erreur alors
-        // ______________ Vérification du password avant la vérification ______________
-        $password_bdd = $data['password'];
+        // ____________ Vérification du password avant la vérification _____________
+
+        $password_bdd = $_SESSION['user']['password'];
         if (password_verify($password, $password_bdd)) {
-            $username_bdd = $data['username'];
+            $username_bdd = $_SESSION['user']['username'];
             $sql = "UPDATE user SET username='{$username}', email = '{$email}' WHERE username='{$username_bdd}'"; // Prépare la requête slq
             $db->query($sql); // Envoie à la bdd
-            $_SESSION['user']['email'] = $email;
+
             $_SESSION['user']['username'] = $username;
-            echo json_encode(['success' => true, 'email' => $email, 'username' => $username]);
+            $_SESSION['user']['email'] = $email;
+
+            echo json_encode(['success' => true, 'username' => $username, 'email' => $email]);
             die();
         } else {
             $password_err = "*Mot de passe incorrect"; // Si vide déclare la variable d'erreur

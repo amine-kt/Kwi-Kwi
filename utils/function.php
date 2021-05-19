@@ -1,7 +1,5 @@
 <?php
 
-
-
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -17,7 +15,6 @@ function resultAsArray($res)
 
 
 
-require('vendor/autoload.php');
 
 function smtpMailer($to, $subject, $body)
 {

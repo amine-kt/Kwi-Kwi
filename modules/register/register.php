@@ -1,8 +1,9 @@
 <?php
 session_start();
 
-require_once('../utils/db_connect.php'); //appel la connexion à la bdd grâce au fichier db_connect.php
-require_once('../utils/function.php'); // Fait appel au fichier php des fonctions
+require_once('../../utils/db_connect.php'); //appel la connexion à la bdd grâce au fichier db_connect.php
+require_once('../../utils/function.php'); // Fait appel au fichier php des fonctions
+require('../../flux/vendor/autoload.php');
 
 // Liste de tout les regex
 $regex_date = "/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/";
@@ -126,8 +127,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { // Si on a requête avec une méthod
                 'email' => $data['email'],
                 'username' => $data['username']
             ];
-            mkdir("../images/{$data['id_user']}/picture_profile", 0777, true); // 0777 correspond au maximum de droits possible et le "true" renvoie true en cas de succès.
-            mkdir("../images/{$data['id_user']}/picture_post", 0777, true);
+            mkdir("../../images/{$data['id_user']}/picture_profile", 0777, true); // 0777 correspond au maximum de droits possible et le "true" renvoie true en cas de succès.
+            mkdir("../../images/{$data['id_user']}/picture_post", 0777, true);
             unset($data['password']);
             echo json_encode(['success' => true, 'user' => $data]); // Envoie au js que c'est un succès
             die(); // stop l'envoie d'info au js

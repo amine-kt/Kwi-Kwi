@@ -97,7 +97,7 @@ $('#cancel_em').click((e) => { // lors du d'un clic sur un boutton
 $("#valider").click((e) => { // lors du d'un clic sur un boutton
     e.preventDefault(); // Empêche tout action par défault des boutton
     $.ajax({ // début de la requête ajax
-        url: "../flux/modif.php", // Redirige les données vers le fichier php login.php
+        url: "./modules/profile/modif.php", // Redirige les données vers le fichier php login.php
         type: "POST", // Le type de la requête est de POST
         data: { // La data envoyer contient :
             username: $("#username").val(), // Valeur de l'input fomulaire correspondant à mon username

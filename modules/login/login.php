@@ -1,8 +1,9 @@
 <?php
 session_start();
 
-require_once('../utils/db_connect.php'); // Fait appel au fichier php de connexion à la bdd
-require_once('../utils/function.php'); // Fait appel au fichier php des fonctions
+require_once('../../utils/db_connect.php'); // Fait appel au fichier php de connexion à la bdd
+require_once('../../utils/function.php'); // Fait appel au fichier php des fonctions
+require('../../flux/vendor/autoload.php');
 
 
 //_______________ Stockage du contenue des input dans des variables _______________________________

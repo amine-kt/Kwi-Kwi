@@ -10,7 +10,7 @@ $("#upload").click((e) => {
     formdata.append('file', files[0]);
 
     $.ajax({
-        url: "../flux/upload.php",
+        url: "./modules/picture_profile/upload.php",
         type: "POST",
         data: formdata,
         dataType: "json",
