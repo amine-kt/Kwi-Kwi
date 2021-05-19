@@ -11,7 +11,7 @@ $("button#postu").click((e) => {
         success: (res, status) => {
             $('#publi').val('')
             console.log(res.mi_result)
-            jQuery.each(res.mi_result, function (i, val) {
+            jQuery.each(res.mi_result, function(i, val) {
                 $("#actu").prepend("<div id=" + val.idpublication + " data=" + val.user_id_user + ">" +
                     "<img src='" + val.picture_profile + "' height='70px'><span>" + val.username + " a Kwikwi le " + val.date_publi + ":</span><br>" +
                     val.content +
@@ -22,11 +22,6 @@ $("button#postu").click((e) => {
                     "<div id='see_comment" + val.idpublication + "'></div>" +
                     "</div>" +
                     "<br><br>")
-                // if ($('div#' + val.idpublication).attr('data') != localStorage.getItem('id')) {
-                //     $('button#delete').css('display', 'none')
-                // } else {
-                //     $('button#delete').css('display', 'initial')
-                // }
             })
         }
     })
@@ -68,7 +63,7 @@ $.ajax({
     dataType: "json",
     success: (res, status) => {
         if (res.success == true) {
-            jQuery.each(res.result, function (i, val) {
+            jQuery.each(res.result, function(i, val) {
                 $("#actu").append("<div id=" + val.idpublication + " data=" + val.user_id_user + ">" +
                     "<img src='" + val.picture_profile + "' height='70px'><span>" + val.username + " a Kwikwi le " + val.date_publi + ":</span><br>" +
                     val.content +
@@ -79,11 +74,6 @@ $.ajax({
                     "<div id='see_comment" + val.idpublication + "'></div>" +
                     "<br><br>" +
                     "</div>")
-                // if ($('div#' + val.idpublication).attr('data') != localStorage.getItem('id')) {
-                //     $('button#delete').css('display', 'none')
-                // } else {
-                //     $('button#delete').css('display', 'initial')
-                // }
             })
         }
     }
