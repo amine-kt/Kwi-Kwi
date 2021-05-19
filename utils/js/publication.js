@@ -9,11 +9,25 @@ $("button#postu").click((e) => {
         },
         dataType: "json",
         success: (res, status) => {
-            if (res.success == false) {
-                $('span#publication_err').text(res.publication_err)
-            } else {
-                $('input#publi').val().empty()
-            }
+            $('#publi').val('')
+            console.log(res.mi_result)
+            jQuery.each(res.mi_result, function(i, val) {
+                $("#actu").prepend("<div id=" + val.idpublication + " data=" + val.user_id_user + ">" +
+                        "<img src='" + val.picture_profile + "' height='70px'><span>" + val.username + " a Kwikwi le " + val.date_publi + ":</span><br>" +
+                        val.content +
+                        "<br><button onclick='like(" + val.idpublication + ")'>like : " + val.like + "</button>" +
+                        "<button onclick='comment(" + val.idpublication + ")'>Commenter</button>" +
+                        "<button id='oracle" + val.idpublication + "' onclick='see_comment(" + val.idpublication + ")'>voir commentaire</button>" +
+                        "<button id='delete' onclick='delete_p(" + val.idpublication + ")'>Supprimer</button>" +
+                        "<div id='see_comment" + val.idpublication + "'></div>" +
+                        "</div>" +
+                        "<br><br>")
+                    // if ($('div#' + val.idpublication).attr('data') != localStorage.getItem('id')) {
+                    //     $('button#delete').css('display', 'none')
+                    // } else {
+                    //     $('button#delete').css('display', 'initial')
+                    // }
+            })
         }
     })
 })
@@ -31,10 +45,13 @@ $("button#send").click((e) => {
         dataType: "json",
         success: (res, status) => {
             if (res.success == true) {
+                $("input#comment").val('')
                 $('form#comm').css('display', 'none')
+                empty_comm($("input#comment").attr('data'))
             } else {
                 $('span#comment_err').text(res.comment_err)
             }
+
         }
     })
 })
@@ -53,15 +70,20 @@ $.ajax({
         if (res.success == true) {
             jQuery.each(res.result, function(i, val) {
                 $("#actu").append("<div id=" + val.idpublication + " data=" + val.user_id_user + ">" +
-                    "<img src='" + val.picture_profile + "' height='70px'><span>" + val.username + " a Kwikwi le " + val.date_publi + ":</span><br>" +
-                    val.content +
-                    "<br><button onclick='like(" + val.idpublication + ")'>like : " + val.like + "</button>" +
-                    "<button onclick='comment(" + val.idpublication + ")'>Commenter</button>" +
-                    "<button id='oracle" + val.idpublication + "' onclick='see_comment(" + val.idpublication + ")'>voir commentaire</button>" +
-                    "<button onclick='delete_p(" + val.idpublication + ")'>Supprimer</button>" +
-                    "<div id='see_comment" + val.idpublication + "'></div>" +
-                    "</div>" +
-                    "<br><br>")
+                        "<img src='" + val.picture_profile + "' height='70px'><span>" + val.username + " a Kwikwi le " + val.date_publi + ":</span><br>" +
+                        val.content +
+                        "<br><button onclick='like(" + val.idpublication + ")'>like : " + val.like + "</button>" +
+                        "<button onclick='comment(" + val.idpublication + ")'>Commenter</button>" +
+                        "<button id='oracle" + val.idpublication + "' onclick='see_comment(" + val.idpublication + ")'>voir commentaire</button>" +
+                        "<button id='delete' onclick='delete_p(" + val.idpublication + ")'>Supprimer</button>" +
+                        "<div id='see_comment" + val.idpublication + "'></div>" +
+                        "<br><br>" +
+                        "</div>")
+                    // if ($('div#' + val.idpublication).attr('data') != localStorage.getItem('id')) {
+                    //     $('button#delete').css('display', 'none')
+                    // } else {
+                    //     $('button#delete').css('display', 'initial')
+                    // }
             })
         }
     }

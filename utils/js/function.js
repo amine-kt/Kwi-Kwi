@@ -90,7 +90,7 @@ function delete_p(idpubli) {
             },
             dataType: "json",
             success: (res, status) => {
-
+                $('section#actu').children().first().remove()
             }
         })
     }
@@ -124,15 +124,15 @@ function see_comment(idpubli) {
         },
         dataType: "json",
         success: (res, status) => {
-            console.log(res.result)
-            console.log(res.number)
+            // console.log(res.result)
+            // console.log(res.number)
             if (res.number != "0") {
                 jQuery.each(res.result, function(i, val) {
                     $('#see_comment' + idpubli).append("<div id='" + val.idcomment + "'style='color:green'>" +
                         "<img src='" + val.picture_profile + "' height='45px'><span>" + val.username + " a Commenté le " + val.date_comm + " :<br>" + val.content + "</span><br>" +
                         "<button onclick='like_comment(" + val.idcomment + ")'>like: " + val.like + "</button>" +
                         "<button onclick='delete_c(" + val.idcomment + ")'>Supprimer</button>" +
-                        "</div><br>")
+                        "<br></div>")
                 })
             } else {
                 $('#see_comment' + idpubli).append("<p style='color:red'>Pas de Commentaire</p>")

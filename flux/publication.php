@@ -29,10 +29,17 @@ $datetime = date("Y-m-d H:i:s");
         die();
     } else {
         $sql = "INSERT INTO publication (content,date_publi,user_id_user) VALUES ('{$publication}','{$datetime}','{$id_user}')";
-        $db->query($sql);
-        echo json_encode(['success' => true]);
+      if($db->query($sql)){
+          $waza= mysqli_query($db,"SELECT MAX(idpublication) as `max` FROM publication");
+          $data = mysqli_fetch_assoc($waza);
+        $req ="SELECT idpublication,content,`like`,date_publi,user_id_user,username,picture_profile,user_id_user FROM `publication` p INNER JOIN `user` u ON p.user_id_user = u.id_user WHERE idpublication ={$data['max']}";
+          $res2 = $db->query($req);
+          echo json_encode(['success' => true, 'mi_result' => resultAsArray($res2)]);
+          
+        }
     }
     break;
+
     case 'like':
 
         $id_publi = $_POST["id_publi"];
