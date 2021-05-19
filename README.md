@@ -9,4 +9,5 @@ mail {
 
 cd .\flux\
 composer install
+
 f1 reload window
