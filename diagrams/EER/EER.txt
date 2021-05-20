@@ -1,0 +1,4 @@
+EER = Enhanced Entity–Relationship ou Extended Entity–Relationship => Modèle entité-association étendu.
+
+Le modèle entité-association étendu est en informatique un modèle de données de haut niveau ou un schéma conceptuel
+incorporant des extensions par rapport au modèle original entité-association, utilisé dans la conception des bases de données.
