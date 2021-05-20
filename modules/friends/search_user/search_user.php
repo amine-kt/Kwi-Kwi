@@ -7,8 +7,8 @@ require('../../../flux/vendor/autoload.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
-    // $req = $db->query("SELECT username FROM user WHERE id_user = 0"); //? Select all the article
-    $username = mysqli_query($db, "SELECT username FROM user WHERE id_user = 0");
-
-    echo json_encode(['success' => true, 'user' => $username]);
+    $req = "SELECT username FROM `user`"; // Requête slq demandans l'username et le mot de passe de l'username
+    $res = $db->query($req); // Execute la requête sql
+    $data = mysqli_fetch_assoc($res);
+    echo ($data['username']);
 }
