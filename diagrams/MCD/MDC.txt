@@ -1,0 +1,6 @@
+MCD = modèle conceptuel des données.
+
+Le modèle conceptuel des données a pour but d'écrire de façon
+formelle les données qui seront utilisées par le système d'information.
+Il s'agit donc d'une représentation des données, facilement compréhensible,
+permettant de décrire le système d'information à l'aide d'entités.

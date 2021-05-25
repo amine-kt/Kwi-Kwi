@@ -1,0 +1,6 @@
+UCD = Use Case Diagram => Diagramme de cas d'utilisation.
+
+Les diagrammes de cas d'utilisation sont des diagrammes UML utilisés
+pour une représentation du comportement fonctionnel d'un système logiciel.
+Ils sont utiles pour des présentations auprès de la direction ou des acteurs d'un projet,
+mais pour le développement, les cas d'utilisation sont plus appropriés.

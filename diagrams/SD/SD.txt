@@ -1,0 +1,4 @@
+SD = Sequence Diagram => Diagramme de séquence.
+
+Un diagramme de séquence est un type de diagramme d'interaction,
+car il décrit comment et dans quel ordre plusieurs objets fonctionnent ensemble.
