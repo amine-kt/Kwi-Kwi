@@ -1,5 +1,53 @@
+function ban(iduser) {
+    let rep = confirm("Etes-vous sur de vouloir supprimer cette utilisateur")
+
+    if (rep) {
+        $.ajax({
+            url: "./modules/admin/admin.php",
+            data: {
+                method: 'ban',
+                iduser: iduser
+            },
+            type: "post",
+            dataType: 'json',
+            success: (res, status) => {
+                if (res.success) {
+                    $('#ban' + iduser).remove()
+                    $('#user' + iduser).append("<td id= deban" + iduser + "> <button onclick ='deban(" + iduser + ")'>Debannir</button></td>")
+                } else {
+                    console.log('une erreur est survenue')
+                }
+            }
+        })
+    }
+}
+
+function deban(iduser) {
+    let rep = confirm("Etes-vous sur de vouloir supprimer cette utilisateur")
+
+    if (rep) {
+        $.ajax({
+            url: "./modules/admin/admin.php",
+            data: {
+                method: 'deban',
+                iduser: iduser
+            },
+            type: "post",
+            dataType: 'json',
+            success: (res, status) => {
+                if (res.success) {
+                    $('#deban' + iduser).remove()
+                    $('#user' + iduser).append("<td id= ban" + iduser + "> <button onclick ='ban(" + iduser + ")'>Bannir</button></td>")
+                } else {
+                    console.log('une erreur est survenue')
+                }
+            }
+        })
+    }
+}
+
 function noconnected() { // Fonction noconnected
-    $(window).on('load', function () { // Au chargement de la page lance la fonction suivante
+    $(window).on('load', function() { // Au chargement de la page lance la fonction suivante
         $.ajax({ // Requête ajax
             url: "./utils/connected.php", // dirigé vers le fichier connected.php
             type: "POST", // Type d'envoie POST
@@ -15,7 +63,7 @@ function noconnected() { // Fonction noconnected
 }
 
 function connected() { // Fonction connected
-    $(window).on('load', function () { // Au chargement de la page lance la fonction :
+    $(window).on('load', function() { // Au chargement de la page lance la fonction :
         $.ajax({ // Requête ajax
             url: "./utils/connected.php", // Envoie vers le fichier php connected.php
             type: "POST", // Type d'envoie en POST
@@ -90,7 +138,7 @@ function delete_p(idpubli) {
             },
             dataType: "json",
             success: (res, status) => {
-                $('section#actu').children().first().remove()
+                $("div#" + idpubli).remove()
             }
         })
     }
@@ -114,6 +162,36 @@ function delete_c(idcomment) {
     }
 }
 
+function report_p(idpubli) {
+    $.ajax({
+        url: "./modules/home/publication/publication.php",
+        type: "POST",
+        data: {
+            method: "report",
+            idpubli: idpubli,
+        },
+        dataType: "json",
+        success: (res, status) => {
+
+        }
+    })
+}
+
+function report_c(idcomm) {
+    $.ajax({
+        url: "./modules/home/comment/comment.php",
+        type: "POST",
+        data: {
+            method: "report_c",
+            idcomm: idcomm,
+        },
+        dataType: "json",
+        success: (res, status) => {
+
+        }
+    })
+}
+
 function see_comment(idpubli) {
     $.ajax({
         url: "./modules/home/publication/publication.php",
@@ -125,10 +203,11 @@ function see_comment(idpubli) {
         dataType: "json",
         success: (res, status) => {
             if (res.number != "0") {
-                jQuery.each(res.result, function (i, val) {
+                jQuery.each(res.result, function(i, val) {
                     $('#see_comment' + idpubli).append("<div id='" + val.idcomment + "'style='color:green'>" +
                         "<img src='" + val.picture_profile + "' height='45px'><span>" + val.username + " a Commenté le " + val.date_comm + " :<br>" + val.content + "</span><br>" +
                         "<button onclick='like_comment(" + val.idcomment + ")'>like: " + val.like + "</button>" +
+                        "<button id='delete' onclick='report_c(" + val.idcomment + ")'>Signaler</button>" +
                         "<button onclick='delete_c(" + val.idcomment + ")'>Supprimer</button>" +
                         "<br></div>")
                 })

@@ -79,6 +79,7 @@ $.ajax({
                         "<br><button onclick='like(" + val.idpublication + ")'>like : " + val.like + "</button>" +
                         "<button onclick='comment(" + val.idpublication + ")'>Commenter</button>" +
                         "<button id='oracle" + val.idpublication + "' onclick='see_comment(" + val.idpublication + ")'>voir commentaire</button>" +
+                        "<button id='delete' onclick='report_p(" + val.idpublication + ")'>Signaler</button>" +
                         "<div id='see_comment" + val.idpublication + "'></div>" +
                         "<br><br>" +
                         "</div>")

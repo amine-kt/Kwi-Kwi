@@ -44,8 +44,10 @@ switch ($_POST['method']) {
 
         $del_like = "DELETE FROM `like_comment` WHERE comment_idcomment = {$idcomment}";
 
+        $del_report = "DELETE FROM reports_comm WHERE comment_idcomment = {$idcomment}";
 
-        if ($db->query($del_like)) {
+
+        if ($db->query($del_like) && $db->query($del_report)) {
             if ($db->query($del_comm)) {
                 echo json_encode(['success' => true]);
             }
@@ -84,10 +86,43 @@ switch ($_POST['method']) {
             }
         }
         break;
+        case 'report_c':
+            $idcomment = $_POST["idcomm"];
+            $id_user = $_SESSION["user"]["id_user"];
+    
+            $plus = "UPDATE comment SET reports = reports + 1 WHERE idcomment = {$idcomment}";
+    
+            $moin = "UPDATE comment SET reports = reports - 1 WHERE idcomment = {$idcomment}";
+    
+            $count = "SELECT COUNT(*) AS reported FROM reports_comm WHERE user_id_user = {$id_user} && comment_idcomment= {$idcomment}";
+    
+            $insert = " INSERT INTO reports_comm (user_id_user,comment_idcomment) VALUES ({$id_user},{$idcomment})";
+    
+            $delete = "DELETE FROM reports_comm WHERE reports_comm.`user_id_user` = {$id_user} AND reports_comm.`comment_idcomment` = {$idcomment} ";
+    
+            $res = $db->query($count);
+            $data = mysqli_fetch_assoc($res);
+    
+            if ($data['reported'] != 0) {
+                if ($db->query($moin)) {
+                    $db->query($delete);
+                    echo json_encode(['success' => "true 1"]);
+                } else {
+                    echo json_encode(['success' => "false 2"]);
+                }
+            } else {
+                if ($db->query($plus)) {
+                    $db->query($insert);
+                    echo json_encode(['success' => "true 3"]);
+                } else {
+                    echo json_encode(['success' => "false 4"]);
+                }
+            }
+            break;
     case 'select':
         $id_publi = $_POST['idpubli'];
 
-        $req = "SELECT idcomment,content,`like`,date_comm,username,picture_profile FROM comment c INNER JOIN `user` u ON c.user_id_user = u.id_user WHERE publication_idpublication = {$id_publi} GROUP BY date_comm DESC";
+        $req = "SELECT idcomment,content,`like`,date_comm,username,picture_profile FROM comment c INNER JOIN `user` u ON c.user_id_user = u.id_user WHERE publication_idpublication = {$id_publi} ORDER BY date_comm DESC";
 
         $req2 = "SELECT COUNT(*) AS numb_comm FROM comment WHERE publication_idpublication = {$id_publi}";
         $count = $db->query($req2);

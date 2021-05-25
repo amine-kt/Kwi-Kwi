@@ -10,8 +10,10 @@ require('../../../flux/vendor/autoload.php');
 switch ($_POST['method']) {
 
     case 'add':
+        // ceci va initialiser le systeme d'erreurs
         $publication_err = NULL;
 
+        // grace a la function mysqli_real_escape_string on evite les injections sql, on récupere l'id de l'user qui s'apprêtent a créer un publication et la date et l'heure à laquelle la fonction est lancer
         $publication = mysqli_real_escape_string($db, $_POST['publication']);
         $id_user = $_SESSION['user']['id_user'];
         $datetime = date("Y-m-d H:i:s");
@@ -74,7 +76,42 @@ switch ($_POST['method']) {
             }
         }
         break;
+        case 'report':
+            $id_publi = $_POST["idpubli"];
+            $id_user = $_SESSION["user"]["id_user"];
+
+            $plus = "UPDATE publication SET reports = reports+ 1 WHERE idpublication = {$id_publi}";
+
+            $moin = "UPDATE publication SET reports = reports- 1 WHERE idpublication = {$id_publi}";
+
+            $count = "SELECT COUNT(*) AS reported FROM reports WHERE  publication_idpublication= {$id_publi} &&user_id_user = {$id_user} ";
+
+            $insert = " INSERT INTO reports (user_id_user,publication_idpublication) VALUES ({$id_user},{$id_publi})";
+
+            $delete = "DELETE FROM reports WHERE user_id_user = {$id_user} AND publication_idpublication = {$id_publi} ";
+
+            $res = $db->query($count);
+
+            $data = mysqli_fetch_assoc($res);
+
+            if ($data['reported'] != 0) {
+                if ($db->query($moin)) {
+                    $db->query($delete);
+                    echo json_encode(['success' => true]);
+                } else {
+                    echo json_encode(['success' => 'false1']);
+                }
+            } else {
+                if ($db->query($plus)) {
+                    $db->query($insert);
+                    echo json_encode(['success' => true]);
+                } else {
+                    echo json_encode(['success' => 'false2']);
+                }
+            }
+            break;
     case 'delete':
+
         $id_publi = $_POST['idpubli'];
 
         $del_publi = "DELETE FROM publication WHERE idpublication = {$id_publi} ";
@@ -83,15 +120,20 @@ switch ($_POST['method']) {
 
         $del_like = "DELETE FROM `like` WHERE publication_idpublication = {$id_publi}";
 
+        $del_report = "DELETE FROM reports WHERE publication_idpublication = {$id_publi}";
+
 
         if ($db->query($del_comm)) {
-            if ($db->query($del_like)) {
+            if ($db->query($del_like) && $db->query($del_report)) {
                 if ($db->query($del_publi)) {
+
                     echo json_encode(['success' => true]);
+
                 }
             }
         }
         break;
+
     case 'comment':
         $id_publi = $_POST['idpubli'];
 
