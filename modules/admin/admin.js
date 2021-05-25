@@ -9,17 +9,29 @@ $.ajax({
         res = JSON.parse(res)
         if (res.success == true) {
             jQuery.each(res.result, function(i, val) {
-                $('table#table_user').append('<tr id= user' + val.id_user + '>' +
-                    '<td>' + val.id_user + '</td>' +
-                    '<td>' + val.firstname + '</td>' +
-                    '<td>' + val.lastname + '</td>' +
-                    '<td>' + val.email + '</td>' +
-                    '<td>' + val.username + '</td>' +
-                    '<td>' + val.created_at + '</td>' +
-                    '<td>' + val.genre + '</td>' +
-                    "<td id= ban" + val.id_user + "> <button onclick ='ban(" + val.id_user + ")'>Bannir</button></td>" +
-                    '</tr>'
-                )
+                if (val.ban == 0) {
+                    $('table#table_user').append('<tr id= user' + val.id_user + '>' +
+                        '<td>' + val.id_user + '</td>' +
+                        '<td>' + val.firstname + '</td>' +
+                        '<td>' + val.lastname + '</td>' +
+                        '<td>' + val.email + '</td>' +
+                        '<td>' + val.username + '</td>' +
+                        '<td>' + val.created_at + '</td>' +
+                        "<td id= ban" + val.id_user + "> <button onclick ='ban(" + val.id_user + ")'>Bannir</button></td>" +
+                        '</tr>'
+                    )
+                } else if (val.ban == 1) {
+                    $('table#table_user').append('<tr id= user' + val.id_user + '>' +
+                        '<td>' + val.id_user + '</td>' +
+                        '<td>' + val.firstname + '</td>' +
+                        '<td>' + val.lastname + '</td>' +
+                        '<td>' + val.email + '</td>' +
+                        '<td>' + val.username + '</td>' +
+                        '<td>' + val.created_at + '</td>' +
+                        "<td id= deban" + val.id_user + "> <button onclick ='deban(" + val.id_user + ")'>Debannir</button></td>" +
+                        '</tr>'
+                    )
+                }
             })
         }
     }

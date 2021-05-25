@@ -17,8 +17,13 @@ $('button').click((e) => { // lors du d'un clic sur un boutton
                     localStorage.setItem('user', JSON.stringify(res.user)); // Stock dans le local storage toutes les info de l'user
                     window.location.replace('./admin.html'); // Je le redirige ensuite vers l'home.html
                 } else {
-                    localStorage.setItem('user', JSON.stringify(res.user)); // Stock dans le local storage toutes les info de l'user
-                    window.location.replace('./home.html'); // Je le redirige ensuite vers l'home.html
+                    if (res.ban == 0) {
+                        localStorage.setItem('user', JSON.stringify(res.user)); // Stock dans le local storage toutes les info de l'user
+                        window.location.replace('./home.html'); // Je le redirige ensuite vers l'home.html}
+                    } else if (res.ban == 1) {
+                        localStorage.setItem('user', JSON.stringify(res.user)); // Stock dans le local storage toutes les info de l'user
+                        window.location.replace('./ban.html'); // Je le redirige ensuite vers l'home.html}
+                    }
                 }
             } else { //? Si l'utilisateur n'existe pas
                 $("#username_err").text(res.username_err); // Selestion la span avec l'id #username_err et ajoute le contenue de la variable d'erreur $username_err

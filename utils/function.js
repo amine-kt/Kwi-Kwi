@@ -23,7 +23,7 @@ function ban(iduser) {
 }
 
 function deban(iduser) {
-    let rep = confirm("Etes-vous sur de vouloir supprimer cette utilisateur")
+    let rep = confirm("Etes-vous sur de vouloir bannir cette utilisateur")
 
     if (rep) {
         $.ajax({

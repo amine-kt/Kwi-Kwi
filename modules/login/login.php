@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { // Si on a requête avec une méthod
         die(); // Stop l'envoie au js
     } else { // Si pas d'erreur alors
         // ____________ Début de la vérification des information envoyer _____________
-        $req = "SELECT id_user, username, firstname, lastname, email, birthdate,role, gender, picture_profile,password FROM `user` WHERE username = '$username'"; // Requête slq demandans l'username et le mot de passe de l'username
+        $req = "SELECT id_user, username, firstname, lastname, email, birthdate,role, gender, picture_profile,password, ban FROM `user` WHERE username = '$username'"; // Requête slq demandans l'username et le mot de passe de l'username
         $res = $db->query($req); // Execute la requête sql
         if ($data = mysqli_fetch_assoc($res)) { // Test si une corespondance dans la variable stock les résultat dans la variable
 
@@ -39,13 +39,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { // Si on a requête avec une méthod
                     'id_user' => $data['id_user'],
                     'email' => $data['email'],
                     'username' => $data['username'],
-                    'role' => $data['role']
+                    'role' => $data['role'],
+                    'ban' => $data['ban']
                 ];
 
-                unset($data['password']);
+               
 
                 $_SESSION['connected'] = true;
-                echo json_encode(['success' => true, 'user' => $data, 'role'=> $data['role']]);
+                echo json_encode(['success' => true, 'user' => $data, 'role'=> $data['role'], 'ban'=>  $data['ban']]);
                 die(); // Stop l'envoie au js
             } else { // Si le mot de passe ne correspond pas alors
                 $password_err = "*Mot de passe incorrecte"; // Déclare la variable d'erreur au mot de passe

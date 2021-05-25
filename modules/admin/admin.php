@@ -8,7 +8,7 @@ require('../../flux/vendor/autoload.php');
 
 switch ($_POST['method']) {
     case 'select':
-        $sql = "SELECT id_user, firstname, lastname, email, username, created_at, gender FROM `user`";
+        $sql = "SELECT id_user, firstname, lastname, email, username, created_at, ban FROM `user` WHERE NOT id_user = 1";
         if ($res = $db->query($sql)) {
             echo json_encode(['success' => true, 'result' => resultAsArray($res)]);
         } else {
