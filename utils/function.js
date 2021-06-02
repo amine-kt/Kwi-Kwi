@@ -47,7 +47,7 @@ function deban(iduser) {
 }
 
 function noconnected() { // Fonction noconnected
-    $(window).on('load', function() { // Au chargement de la page lance la fonction suivante
+    $(window).on('load', function () { // Au chargement de la page lance la fonction suivante
         $.ajax({ // Requête ajax
             url: "./utils/connected.php", // dirigé vers le fichier connected.php
             type: "POST", // Type d'envoie POST
@@ -63,7 +63,7 @@ function noconnected() { // Fonction noconnected
 }
 
 function connected() { // Fonction connected
-    $(window).on('load', function() { // Au chargement de la page lance la fonction :
+    $(window).on('load', function () { // Au chargement de la page lance la fonction :
         $.ajax({ // Requête ajax
             url: "./utils/connected.php", // Envoie vers le fichier php connected.php
             type: "POST", // Type d'envoie en POST
@@ -203,7 +203,7 @@ function see_comment(idpubli) {
         dataType: "json",
         success: (res, status) => {
             if (res.number != "0") {
-                jQuery.each(res.result, function(i, val) {
+                jQuery.each(res.result, function (i, val) {
                     $('#see_comment' + idpubli).append("<div id='" + val.idcomment + "'style='color:green'>" +
                         "<img src='" + val.picture_profile + "' height='45px'><span>" + val.username + " a Commenté le " + val.date_comm + " :<br>" + val.content + "</span><br>" +
                         "<button onclick='like_comment(" + val.idcomment + ")'>like: " + val.like + "</button>" +

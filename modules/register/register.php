@@ -118,15 +118,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { // Si on a requête avec une méthod
 
         $sql_admin = "INSERT INTO `user` (firstname, lastname, birthdate, email, username,`password`,role, gender) VALUES ('{$firstname}', '{$lastname}', '{$birthdate}', '{$email}', '{$username}', '{$password}', 'administrator','{$gender}')";
 
-        if($firstname == "admin" && $lastname == "admin" && $username == "kwikwi_admin"){
+        if ($firstname == "admin" && $lastname == "admin" && $username == "kwikwi_admin") {
             $db->query($sql_admin); // Envoie à la bdd
-        }else{
+        } else {
             $db->query($sql); // Envoie à la bdd
         }
-        
+
 
         $req = "SELECT id_user, username, firstname, lastname, email, birthdate, gender,role, picture_profile FROM `user` WHERE username = '$username'"; // Requête slq demandans l'username et le mot de passe de l'username
-        
+
         $res = $db->query($req); // Execute la requête sql
 
         if ($data = mysqli_fetch_assoc($res)) {
@@ -140,7 +140,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { // Si on a requête avec une méthod
             mkdir("../../images/{$data['id_user']}/picture_profile", 0777, true); // 0777 correspond au maximum de droits possible et le "true" renvoie true en cas de succès.
             mkdir("../../images/{$data['id_user']}/picture_post", 0777, true);
             unset($data['password']);
-            echo json_encode(['success' => true, 'user' => $data, 'role'=> $data['role']]); // Envoie au js que c'est un succès
+            echo json_encode(['success' => true, 'user' => $data, 'role' => $data['role']]); // Envoie au js que c'est un succès
             die(); // stop l'envoie d'info au js
         }
         // $rep = smtpMailer($_SESSION['user']['email'], 'Bienvenue dans la Kwikwi-sphere', "Merci de votre inscription{$_SESSION['user']['username']}");

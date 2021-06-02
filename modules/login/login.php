@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { // Si on a requête avec une méthod
         $res = $db->query($req); // Execute la requête sql
         if ($data = mysqli_fetch_assoc($res)) { // Test si une corespondance dans la variable stock les résultat dans la variable
 
-            if (password_verify(($password),$data["password"])) { // Vérifie le password en le comparant avec le hash du password de la bdd
+            if (password_verify(($password), $data["password"])) { // Vérifie le password en le comparant avec le hash du password de la bdd
                 $_SESSION['user'] = [
                     'id_user' => $data['id_user'],
                     'email' => $data['email'],
@@ -43,14 +43,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { // Si on a requête avec une méthod
                     'ban' => $data['ban']
                 ];
 
-               
-
                 $_SESSION['connected'] = true;
-                echo json_encode(['success' => true, 'user' => $data, 'role'=> $data['role'], 'ban'=>  $data['ban']]);
+                echo json_encode(['success' => true, 'user' => $data, 'role' => $data['role'], 'ban' =>  $data['ban']]);
                 die(); // Stop l'envoie au js
             } else { // Si le mot de passe ne correspond pas alors
                 $password_err = "*Mot de passe incorrecte"; // Déclare la variable d'erreur au mot de passe
-                echo json_encode(['success' => false, 'username_err' => $username_err, 'password_err' => $password_err, "passw"=> $data["password"]]); // Envoie les erreur au js avec le succes false
+                echo json_encode(['success' => false, 'username_err' => $username_err, 'password_err' => $password_err, "passw" => $data["password"]]); // Envoie les erreur au js avec le succes false
                 die(); // Si le mot de passe ne correspond pas alors
             }
         } else { // Sinon avec aucun résultat avec l'username alors
