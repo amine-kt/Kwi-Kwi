@@ -55,7 +55,7 @@ function noconnected() { // Fonction noconnected
             success: (res, status) => { // réponse avec success
                 res = JSON.parse(res) // Sert à transformer une chaine de caractere en objet
                 if (res.connected == false) { // Si la réponse connected est fausse alors
-                    window.location.replace('./login.html'); // Redirige vers la page login.html
+                    window.location.replace('login.html'); // Redirige vers la page login.html
                 }
             }
         })
@@ -71,7 +71,7 @@ function connected() { // Fonction connected
             success: (res, status) => { // réponse avec success
                 res = JSON.parse(res) // Sert à transformer une chaine de caractere en objet
                 if (res.connected == true) { // Si la réponse de connecté est vrai
-                    window.location.replace('./home.html'); // Redirige vers la page home
+                    window.location.replace('home.html'); // Redirige vers la page home
                 }
             }
         })
