@@ -137,21 +137,21 @@ switch ($_POST['method']) {
     case 'comment':
         $id_publi = $_POST['idpubli'];
 
-        $req = "SELECT idcomment,content,`like`,date_comm,username,picture_profile FROM comment c INNER JOIN `user` u ON c.user_id_user = u.id_user WHERE publication_idpublication = {$id_publi} ORDER BY date_comm DESC";
+        $req = "SELECT idcomment,content,`like`,date_comm,username,user_id_user,picture_profile FROM comment c INNER JOIN `user` u ON c.user_id_user = u.id_user WHERE publication_idpublication = {$id_publi} ORDER BY date_comm DESC";
 
         $req2 = "SELECT COUNT(*) AS numb_comm FROM comment WHERE publication_idpublication = {$id_publi}";
         $count = $db->query($req2);
         $data = mysqli_fetch_assoc($count);
 
         if ($res = $db->query($req)) {
-            echo json_encode(['success' => true, 'result' => resultAsArray($res), 'number' => $data['numb_comm']]);
+            echo json_encode(['success' => true, 'result' => resultAsArray($res), 'number' => $data['numb_comm'], "user" => $_SESSION['user']['id_user']]);
         } else {
             echo json_encode(['success' => 'false']);
         }
         break;
     case 'select':
 
-        $req = "SELECT idpublication,content,`like`,date_publi,user_id_user,username,picture_profile,user_id_user FROM `publication` p INNER JOIN `user` u ON p.user_id_user = u.id_user ORDER BY date_publi DESC";
+        $req = "SELECT idpublication,content,`like`,date_publi,user_id_user,username,picture_profile FROM `publication` p INNER JOIN `user` u ON p.user_id_user = u.id_user ORDER BY date_publi DESC";
 
         if ($res = $db->query($req)) {
             echo json_encode(['success' => true, 'result' => resultAsArray($res), "user" => $_SESSION['user']['id_user']]);
@@ -159,6 +159,5 @@ switch ($_POST['method']) {
             echo json_encode(['success' => 'false']);
         }
     default:
-
         break;
 }

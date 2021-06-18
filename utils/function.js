@@ -1,5 +1,5 @@
 function ban(iduser) {
-    let rep = confirm("Etes-vous sur de vouloir supprimer cette utilisateur")
+    let rep = confirm("Etes-vous sur de vouloir bannir cette utilisateur")
 
     if (rep) {
         $.ajax({
@@ -13,7 +13,7 @@ function ban(iduser) {
             success: (res, status) => {
                 if (res.success) {
                     $('#ban' + iduser).remove()
-                    $('#user' + iduser).append("<td id= deban" + iduser + "> <button onclick ='deban(" + iduser + ")'>Debannir</button></td>")
+                    $('#user' + iduser).append("<td id= deban" + iduser + "> <button class='valid' onclick ='deban(" + iduser + ")'>Debannir</button></td>")
                 } else {
                     console.log('une erreur est survenue')
                 }
@@ -23,7 +23,7 @@ function ban(iduser) {
 }
 
 function deban(iduser) {
-    let rep = confirm("Etes-vous sur de vouloir bannir cette utilisateur")
+    let rep = confirm("Etes-vous sur de vouloir débannir cette utilisateur")
 
     if (rep) {
         $.ajax({
@@ -37,7 +37,7 @@ function deban(iduser) {
             success: (res, status) => {
                 if (res.success) {
                     $('#deban' + iduser).remove()
-                    $('#user' + iduser).append("<td id= ban" + iduser + "> <button onclick ='ban(" + iduser + ")'>Bannir</button></td>")
+                    $('#user' + iduser).append("<td id= ban" + iduser + "> <button class='delete' onclick ='ban(" + iduser + ")'>Bannir</button></td>")
                 } else {
                     console.log('une erreur est survenue')
                 }
@@ -47,7 +47,7 @@ function deban(iduser) {
 }
 
 function noconnected() { // Fonction noconnected
-    $(window).on('load', function () { // Au chargement de la page lance la fonction suivante
+    $(window).on('load', function() { // Au chargement de la page lance la fonction suivante
         $.ajax({ // Requête ajax
             url: "./utils/connected.php", // dirigé vers le fichier connected.php
             type: "POST", // Type d'envoie POST
@@ -63,7 +63,7 @@ function noconnected() { // Fonction noconnected
 }
 
 function connected() { // Fonction connected
-    $(window).on('load', function () { // Au chargement de la page lance la fonction :
+    $(window).on('load', function() { // Au chargement de la page lance la fonction :
         $.ajax({ // Requête ajax
             url: "./utils/connected.php", // Envoie vers le fichier php connected.php
             type: "POST", // Type d'envoie en POST
@@ -85,7 +85,7 @@ function picture_profile() {
 
 function empty_comm(idpubli) {
     $('#see_comment' + idpubli).empty()
-    $('button#oracle' + idpubli).css('display', 'initial')
+    $('button#oracle' + idpubli).css('visibility', 'inherit')
 }
 
 function like(idpubli) {
@@ -107,7 +107,7 @@ function like(idpubli) {
 }
 
 function comment(idpubli) {
-    $('form#comm').css('display', 'initial')
+    $('form#comm').css('visibility', 'inherit')
     $("input#comment").attr('data', idpubli)
 }
 
@@ -156,7 +156,13 @@ function delete_c(idcomment) {
             },
             dataType: "json",
             success: (res, status) => {
-
+                if (res.success == true) {
+                    $("input#comment").val('')
+                    $('form#comm').css('visibility', 'hidden')
+                    empty_comm($("input#comment").attr('data'))
+                } else {
+                    $('span#comment_err').text(res.comment_err)
+                }
             }
         })
     }
@@ -203,19 +209,25 @@ function see_comment(idpubli) {
         dataType: "json",
         success: (res, status) => {
             if (res.number != "0") {
-                jQuery.each(res.result, function (i, val) {
-                    $('#see_comment' + idpubli).append("<div id='" + val.idcomment + "'style='color:green'>" +
-                        "<img src='" + val.picture_profile + "' height='45px'><span>" + val.username + " a Commenté le " + val.date_comm + " :<br>" + val.content + "</span><br>" +
-                        "<button onclick='like_comment(" + val.idcomment + ")'>like: " + val.like + "</button>" +
-                        "<button id='delete' onclick='report_c(" + val.idcomment + ")'>Signaler</button>" +
-                        "<button onclick='delete_c(" + val.idcomment + ")'>Supprimer</button>" +
-                        "<br></div>")
+                jQuery.each(res.result, function(i, val) {
+                    if (res.user == val.user_id_user) {
+                        $('#see_comment' + idpubli).append("<div id='" + val.idcomment + "'style='color:green'>" +
+                            "<img src='" + val.picture_profile + "' height='45px'><span>" + val.username + " a Commenté le " + val.date_comm + " :<br></span><hr><p>" + val.content + "<p><br>" +
+                            "<button class='like' onclick='like_comment(" + val.idcomment + ")'>like: " + val.like + "</button>" +
+                            "<button class='delete' onclick='delete_c(" + val.idcomment + ")'>Supprimer</button>" +
+                            "<br></div>")
+                    } else if (res.user != val.user_id_user) {
+                        $('#see_comment' + idpubli).append("<div id='" + val.idcomment + "'style='color:green'>" +
+                            "<img src='" + val.picture_profile + "' height='45px'><span>" + val.username + " a Commenté le " + val.date_comm + " :<br></span><hr><p>" + val.content + "<p><br>" +
+                            "<button class='like' onclick='like_comment(" + val.idcomment + ")'>like: " + val.like + "</button>" +
+                            "<button class='report' id='report_c' onclick='report_c(" + val.idcomment + ")'>Signaler</button>")
+                    }
                 })
             } else {
                 $('#see_comment' + idpubli).append("<p style='color:red'>Pas de Commentaire</p>")
             }
             $('#see_comment' + idpubli).append("<button onclick = 'empty_comm(" + idpubli + ")'>Cacher commentaire</button>")
-            $('button#oracle' + idpubli).css('display', 'none')
+            $('button#oracle' + idpubli).css('visibility', 'hidden')
         }
     })
 }
