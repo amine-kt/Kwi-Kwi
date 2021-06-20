@@ -86,39 +86,39 @@ switch ($_POST['method']) {
             }
         }
         break;
-        case 'report_c':
-            $idcomment = $_POST["idcomm"];
-            $id_user = $_SESSION["user"]["id_user"];
-    
-            $plus = "UPDATE comment SET reports = reports + 1 WHERE idcomment = {$idcomment}";
-    
-            $moin = "UPDATE comment SET reports = reports - 1 WHERE idcomment = {$idcomment}";
-    
-            $count = "SELECT COUNT(*) AS reported FROM reports_comm WHERE user_id_user = {$id_user} && comment_idcomment= {$idcomment}";
-    
-            $insert = " INSERT INTO reports_comm (user_id_user,comment_idcomment) VALUES ({$id_user},{$idcomment})";
-    
-            $delete = "DELETE FROM reports_comm WHERE reports_comm.`user_id_user` = {$id_user} AND reports_comm.`comment_idcomment` = {$idcomment} ";
-    
-            $res = $db->query($count);
-            $data = mysqli_fetch_assoc($res);
-    
-            if ($data['reported'] != 0) {
-                if ($db->query($moin)) {
-                    $db->query($delete);
-                    echo json_encode(['success' => "true 1"]);
-                } else {
-                    echo json_encode(['success' => "false 2"]);
-                }
+    case 'report_c':
+        $idcomment = $_POST["idcomm"];
+        $id_user = $_SESSION["user"]["id_user"];
+
+        $plus = "UPDATE comment SET reports = reports + 1 WHERE idcomment = {$idcomment}";
+
+        $moin = "UPDATE comment SET reports = reports - 1 WHERE idcomment = {$idcomment}";
+
+        $count = "SELECT COUNT(*) AS reported FROM reports_comm WHERE user_id_user = {$id_user} && comment_idcomment= {$idcomment}";
+
+        $insert = " INSERT INTO reports_comm (user_id_user,comment_idcomment) VALUES ({$id_user},{$idcomment})";
+
+        $delete = "DELETE FROM reports_comm WHERE reports_comm.`user_id_user` = {$id_user} AND reports_comm.`comment_idcomment` = {$idcomment} ";
+
+        $res = $db->query($count);
+        $data = mysqli_fetch_assoc($res);
+
+        if ($data['reported'] != 0) {
+            if ($db->query($moin)) {
+                $db->query($delete);
+                echo json_encode(['success' => "true 1"]);
             } else {
-                if ($db->query($plus)) {
-                    $db->query($insert);
-                    echo json_encode(['success' => "true 3"]);
-                } else {
-                    echo json_encode(['success' => "false 4"]);
-                }
+                echo json_encode(['success' => "false 2"]);
             }
-            break;
+        } else {
+            if ($db->query($plus)) {
+                $db->query($insert);
+                echo json_encode(['success' => "true 3"]);
+            } else {
+                echo json_encode(['success' => "false 4"]);
+            }
+        }
+        break;
     default:
         break;
 }

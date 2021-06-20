@@ -43,9 +43,9 @@ body {
         font-size: 14px;
         padding: 6px;
         cursor: pointer;
-    }
-    button:hover {
-        background: #43a047;
+        &:hover {
+            background: #43a047;
+        }
     }
 
     form {

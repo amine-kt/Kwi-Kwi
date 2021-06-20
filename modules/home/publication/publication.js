@@ -11,7 +11,7 @@ $("button#postu").click((e) => {
         success: (res, status) => {
             $('#publi').val('')
             console.log(res.mi_result)
-            jQuery.each(res.mi_result, function(i, val) {
+            jQuery.each(res.mi_result, function (i, val) {
                 $("#actu").prepend("<div class='publication' id=" + val.idpublication + " data=" + val.user_id_user + ">" +
                     "<img src='" + val.picture_profile + "' height='70px'><span>" + val.username + " a Kwikwi le " + val.date_publi + ":</span><br><p>" +
                     val.content +
@@ -60,10 +60,10 @@ $.ajax({
     dataType: "json",
     success: (res, status) => {
         if (res.success == true) {
-            jQuery.each(res.result, function(i, val) {
+            jQuery.each(res.result, function (i, val) {
                 if (res.user == val.user_id_user) {
                     $("#actu").append("<div class='publication' id=" + val.idpublication + " data=" + val.user_id_user + ">" +
-                        "<img src='" + val.picture_profile + "' height='70px'><span>" + val.username + " a Kwikwi le " + val.date_publi + ":</span><hr><br><p>" +
+                        "<img src='" + val.picture_profile + "' height='70px'><span>" + val.username + " a Kwikwi le " + val.date_publi + ":</span><br><p>" +
                         val.content +
                         "</p><br><button class='like' onclick='like(" + val.idpublication + ")'>like : " + val.like + "</button>" +
                         "<button class='comment' onclick='comment(" + val.idpublication + ")'>Commenter</button>" +
@@ -74,7 +74,7 @@ $.ajax({
                         "</div>")
                 } else if (res.user != val.user_id_user) {
                     $("#actu").append("<div class='publication' id=" + val.idpublication + " data=" + val.user_id_user + ">" +
-                        "<img src='" + val.picture_profile + "' height='70px'><span>" + val.username + " a Kwikwi le " + val.date_publi + ":</span><hr><br><p>" +
+                        "<img src='" + val.picture_profile + "' height='70px'><span>" + val.username + " a Kwikwi le " + val.date_publi + ":</span><br><p>" +
                         val.content +
                         "</p><br><button class='like' onclick='like(" + val.idpublication + ")'>like : " + val.like + "</button>" +
                         "<button class='comment' onclick='comment(" + val.idpublication + ")'>Commenter</button>" +
