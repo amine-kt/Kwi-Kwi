@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modification Photo de profile</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="./css/modif_photo.min.css">
 </head>
 
 <style>
@@ -18,18 +19,19 @@
 <body>
     <header>
         <a href="./home.html">Home</a> <a href="./profile.html">Profil</a> <a id="admin" href="./admin.html">gestion</a>
-        <h1>Modifier ma photo de profile</h1>
     </header>
-    <main>
-        <p>Photo de profil actuelle :</p>
-        <img src="" alt="" class="picture_profile" height="100px">
+    <main class="container">
         <form>
+            <h1>Modifier ma photo de profile</h1>
+            <p>Photo de profil actuelle :</p><br>
+            <img src="" alt="" class="picture_profile" height="100px"><br>
             <label for="file">Choisissez une image à télécharger :</label>
             <input type="file" name="file" id="file">
-            <input type="submit" id="upload"><span id="file_err"></span><br>
+            <button type="submit" class="upload" id="upload">upload</button><span id="file_err"></span><br>
+            <!-- <input type="submit" class="upload" id="upload"><span id="file_err"></span><br> -->
+            <!-- lien redirige vers la page profil -->
+            <a href="./profile.html">Retour page profile</a>
         </form><br>
-        <!-- lien redirige vers la page profil -->
-        <a href="./profile.html">Retour page profile</a>
     </main>
 </body>
 

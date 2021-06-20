@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Register</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="./css/register.min.css">
 </head>
 
 <!-- style provisoire -->
@@ -15,57 +16,59 @@
 </style>
 
 <body>
-    <h1>Register</h1>
+    <div class="container">
 
-    <form>
-        <!-- Prénom -->
-        <label for="firstname">Firstname :</label>
-        <input type="text" name="firstname" id="firstname" placeholder="Prénom">
-        <span id="firstname_err"></span><br>
+        <form>
+            <h1>Register</h1>
+            <!-- Prénom -->
+            <span id="firstname_err"></span><br>
+            <label for="firstname">Firstname :</label>
+            <input type="text" name="firstname" id="firstname" placeholder="Prénom"><br>
 
-        <!-- Nom -->
-        <label for="lastname">Lastname :</label>
-        <input type="text" name="lastname" id="lastname" placeholder="Nom">
-        <span id="lastname_err"></span><br>
+            <!-- Nom -->
+            <span id="lastname_err"></span><br>
+            <label for="lastname">Lastname :</label>
+            <input type="text" name="lastname" id="lastname" placeholder="Nom"><br>
 
-        <!-- Date de naissance -->
-        <label for="birthdate">Birthdate :</label>
-        <input type="date" name="birthdate" id="birthdate">
-        <span id="birthdate_err"></span><br>
+            <!-- Date de naissance -->
+            <span id="birthdate_err"></span><br>
+            <label for="birthdate">Birthdate :</label>
+            <input type="date" name="birthdate" id="birthdate"><br>
 
-        <!-- Email -->
-        <label for="email">Email :</label>
-        <input type="email" name="email" id="email" placeholder="Email">
-        <span id="email_err"></span><br>
+            <!-- Email -->
+            <span id="email_err"></span><br>
+            <label for="email">Email :</label>
+            <input type="email" name="email" id="email" placeholder="Email"><br>
 
-        <!-- Genre -->
-        <label for="">Gender :</label>
-        <input type="radio" id="male" name="gender" value="male">
-        <label for="male">Male</label>
-        <input type="radio" id="femal" name="gender" value="femal">
-        <label for="femal">Femal</label>
-        <input type="radio" id="other" name="gender" value="other">
-        <label for="other">Other</label>
-        <span id="gender_err"></span><br>
+            <!-- Genre -->
+            <span id="gender_err"></span><br>
+            <label for="">Gender :</label>
+            <input type="radio" id="male" name="gender" value="male">
+            <label for="male">Male</label>
+            <input type="radio" id="femal" name="gender" value="femal">
+            <label for="femal">Femal</label>
+            <input type="radio" id="other" name="gender" value="other">
+            <label for="other">Other</label><br>
 
-        <!-- Username -->
-        <label for="username">Username :</label>
-        <input type="text" name="username" id="username" placeholder="Username">
-        <span id="username_err"></span><br>
+            <!-- Username -->
+            <span id="username_err"></span><br>
+            <label for="username">Username :</label>
+            <input type="text" name="username" id="username" placeholder="Username"><br>
 
-        <!-- Mot de passe -->
-        <label for="password">Password :</label>
-        <input type="password" name="password" id="password" placeholder="Mot de passe">
-        <span id="password_err"></span><br>
+            <!-- Mot de passe -->
+            <span id="password_err"></span><br>
+            <label for="password">Password :</label>
+            <input type="password" name="password" id="password" placeholder="Mot de passe"><br>
 
-        <!-- Confirmation du mot de passe -->
-        <label for="confirm_password">Confirm Password :</label>
-        <input type="password" name="confirm_password" id="confirm_password" placeholder="confirm password">
-        <span id="confirm_password_err"></span><br><br>
+            <!-- Confirmation du mot de passe -->
+            <span id="confirm_password_err"></span><br>
+            <label for="confirm_password">Confirm Password :</label>
+            <input type="password" name="confirm_password" id="confirm_password" placeholder="confirm password"><br>
 
-        <button>S'inscrire</button>
-    </form>
-    <p>Déjà inscrit ? <a href="./login.html">Connectez-vous ici</a></p>
+            <button>S'inscrire</button>
+            <p>Déjà inscrit ? <a href="./login.html">Connectez-vous ici</a></p>
+        </form>
+    </div>
 </body>
 
 <script src="./utils/function.js"></script>

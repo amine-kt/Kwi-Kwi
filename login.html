@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <title>Login</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="./css/login.min.css">
 </head>
 
 <!-- style provisoire -->
@@ -17,21 +18,21 @@
 </style>
 
 <body>
-    <h1>Login</h1>
-    <p></p>
+    <div class="container">
 
-    <form>
-        <span id="err"></span><br>
-        <label for="username">Username :</label>
-        <input type="text" placeholder="username" name="username" id="username">
-        <span id="username_err"></span><br>
-        <label for="password">Password :</label>
-        <input type="password" placeholder="••••••••" name="password" id="password">
-        <span id="password_err"></span><br><br>
-        <button>Connexion</button>
-    </form>
-    <p>Mot de passe oublié ? Cliquez <a href="">ici</a></p>
-    <p>Pas de compte ? <a href="./register.html">Inscrivez-vous ici</a></p>
+        <form>
+            <h1>Login</h1>
+            <span id="username_err"></span><br>
+            <label for="username">Username :</label>
+            <input type="text" placeholder="username" name="username" id="username"><br>
+            <span id="password_err"></span><br>
+            <label for="password">Password :</label>
+            <input type="password" placeholder="••••••••" name="password" id="password"><br>
+            <button>Connexion</button>
+            <p>Mot de passe oublié ? Cliquez <a href="">ici</a></p>
+            <p>Pas de compte ? <a href="./register.html">Inscrivez-vous ici</a></p>
+        </form>
+    </div>
 </body>
 
 <script src="./utils/function.js"></script>

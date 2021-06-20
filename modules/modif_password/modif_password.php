@@ -12,7 +12,10 @@ $password = mysqli_real_escape_string($db, $_POST['password']);
 $new_password = mysqli_real_escape_string($db, $_POST["new_password"]);
 $confirm_new_password = mysqli_real_escape_string($db, $_POST["confirm_new_password"]);
 
-$password_bdd = $_SESSION['user']['password'];
+$req = "SELECT password FROM `user` WHERE id_user = {$_SESSION['user']['id_user']}";
+$res = $db->query($req);
+$data = mysqli_fetch_assoc($res);
+$password_bdd =  $data["password"];
 
 // ___________ Début des test des input ___________
 if ($_SERVER["REQUEST_METHOD"] == "POST") { // Si on a requête avec une méthode POST (donc un envoie de formulaire)

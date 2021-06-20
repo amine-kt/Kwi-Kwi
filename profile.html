@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="./css/profil.min.css">
 </head>
 
 <style>
@@ -18,12 +19,13 @@
 <body>
     <header>
         <a href="./home.html">Home</a> <a href="./profile.html">Profil</a> <a id="admin" href="./admin.html">gestion</a>
-        <h1>Votre Profil</h1>
     </header>
-    <main>
-        <img src="" alt="" class="picture_profile" height="100px"><br>
-        <a href="./picture_profile.html">Modifier votre photo de profile</a>
+    <main class="container">
         <form>
+            <h1>Votre Profil</h1>
+            <img src="" alt="" class="picture_profile" height="100px"><br>
+            <a href="./picture_profile.html">Modifier votre photo de profile</a>
+
             <!-- Prénom, Nom -->
             <br><label id="lab_fi"></label><br>
             <label id="lab_la"></label><br>
@@ -53,12 +55,10 @@
             <input type="password" placeholder="••••••••" name="password" id="password">
             <button id="valider">Valider</button>
             <span id="password_err"></span>
-
-
+            <!-- lien redirige vers la page de modification du mot de passe -->
+            <a href="./modif_password.html" id="modif_pass">Modifier mon password</a href="./modif_password.html">
         </form>
 
-        <!-- lien redirige vers la page de modification du mot de passe -->
-        <a href="./modif_password.html" id="modif_pass">Modifier mon password</a href="./modif_password.html">
 
     </main>
 </body>
