@@ -112,6 +112,7 @@ $("#valider").click((e) => { // lors du d'un clic sur un boutton
                 user.username = res.username;
                 user.email = res.email;
                 localStorage.setItem('user', JSON.stringify(user));
+                location.reload();
             } else { // Sinon affiche les messages messages d'erreur
                 $("#email_err").text(res.email_err); // Selestion la span avec l'id #email_err et ajoute le contenue de la variable d'erreur $email_err
                 $("#username_err").text(res.username_err); // Selestion la span avec l'id #username_err et ajoute le contenue de la variable d'erreur $username_err

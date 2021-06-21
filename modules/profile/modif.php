@@ -59,22 +59,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die(); // Stop l'envoie au js
     } else { // Si pas d'erreur alors
         // ____________ Vérification du password avant la vérification _____________
+        $req = "SELECT username,password FROM `user` WHERE username = '{$_SESSION['user']['username']}'"; // Requête slq demandans l'username et le mot de passe de l'username
+        $res = $db->query($req); // Execute la requête sql
+        if ($data = mysqli_fetch_assoc($res)) { // Test si une corespondance dans la variable stock les résultat dans la variable
 
-        $password_bdd = $_SESSION['user']['password'];
-        if (password_verify($password, $password_bdd)) {
-            $username_bdd = $_SESSION['user']['username'];
-            $sql = "UPDATE user SET username='{$username}', email = '{$email}' WHERE username='{$username_bdd}'"; // Prépare la requête slq
-            $db->query($sql); // Envoie à la bdd
+            if (password_verify(($password), $data["password"])) {
+                $username_bdd = $_SESSION['user']['username'];
+                $sql = "UPDATE user SET username='{$username}', email = '{$email}' WHERE username='{$username_bdd}'"; // Prépare la requête slq
+                $db->query($sql); // Envoie à la bdd
 
-            $_SESSION['user']['username'] = $username;
-            $_SESSION['user']['email'] = $email;
+                $_SESSION['user']['username'] = $username;
+                $_SESSION['user']['email'] = $email;
 
-            echo json_encode(['success' => true, 'username' => $username, 'email' => $email]);
-            die();
-        } else {
-            $password_err = "*Mot de passe incorrect"; // Si vide déclare la variable d'erreur
-            echo json_encode(['success' => false, 'password_err' => $password_err]);
-            die();
+                echo json_encode(['success' => true, 'username' => $username, 'email' => $email]);
+                die();
+            } else {
+                $password_err = "*Mot de passe incorrect"; // Si vide déclare la variable d'erreur
+                echo json_encode(['success' => false, 'password_err' => $password_err]);
+                die();
+            }
         }
     }
 }
