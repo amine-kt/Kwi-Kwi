@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `kwikwi_db`.`user` (
   `subscription` INT NOT NULL DEFAULT 0,
   `subscriber` INT NOT NULL DEFAULT 0,
   `picture_profile` VARCHAR(255) NOT NULL DEFAULT './images/default/picture.png',
-  `ban` TINYINT NOT NULL,
+  `ban` TINYINT NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_user`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC),
   UNIQUE INDEX `username_UNIQUE` (`username` ASC)
